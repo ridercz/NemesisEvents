@@ -15,5 +15,7 @@ namespace Altairis.NemesisEvents.DAL {
 
         public virtual ICollection<Event> OwnedEvents { get; set; }
 
+        public virtual ICollection<Attendee> Attendances { get; set; }
+
     }
 }

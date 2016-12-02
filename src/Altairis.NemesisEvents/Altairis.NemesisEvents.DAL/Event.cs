@@ -24,7 +24,7 @@ namespace Altairis.NemesisEvents.DAL {
         [Required]
         public int VenueId { get; set; }
 
-        public virtual Venue Venue { get; set; }
+        public Venue Venue { get; set; }
 
         [Required]
         public bool UseRegistration { get; set; }
@@ -50,6 +50,7 @@ namespace Altairis.NemesisEvents.DAL {
         [ForeignKey("OwnerId")]
         public User Owner { get; set; }
 
+        public virtual ICollection<Attendee> Attendees { get; set; }
 
     }
 }

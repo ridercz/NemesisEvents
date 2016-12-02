@@ -22,5 +22,7 @@ namespace Altairis.NemesisEvents.DAL {
 
         public DbSet<Venue> Venues { get; set; }
 
+        public DbSet<Attendee> Attendees { get; set; }
+
     }
 }
