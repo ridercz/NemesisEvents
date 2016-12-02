@@ -12,7 +12,7 @@ namespace Altairis.NemesisEvents.DAL {
 
         public virtual Area Area { get; set; }
 
-        [Required, MaxLength(100)]
+        [MaxLength(100)]
         public string City { get; set; }
 
         [Required, MaxLength(100)]
@@ -27,7 +27,7 @@ namespace Altairis.NemesisEvents.DAL {
 
         public decimal? Longitude { get; set; }
 
-        public virtual ICollection<Event> Events { get; set; }
+        public virtual ICollection<Event> Events { get; } = new HashSet<Event>();
 
     }
 }

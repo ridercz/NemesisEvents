@@ -32,11 +32,19 @@ namespace Altairis.NemesisEvents.DAL {
         [Required]
         public bool AllowRegistration { get; set; }
 
+        [MaxLength(100), Url]
+        public string RegistrationUrl { get; set; }
+
+        [MaxLength(100), Url]
+        public string VideoUrl { get; set; }
+
+        [MaxLength(100), Url]
+        public string InfoUrl { get; set; }
+
         [Required, MaxLength(100)]
         public string OrganizerName { get; set; }
 
-        [Required]
-        public int AdmissionFee { get; set; }
+        public string AdmissionFee { get; set; }
 
         [Required]
         public DateTime DateCreated { get; set; }
@@ -50,7 +58,9 @@ namespace Altairis.NemesisEvents.DAL {
         [ForeignKey("OwnerId")]
         public User Owner { get; set; }
 
-        public virtual ICollection<Attendee> Attendees { get; set; }
+        public virtual ICollection<Attendee> Attendees { get; } = new HashSet<Attendee>();
+
+        public virtual ICollection<EventTag> EventTags { get; } = new HashSet<EventTag>();
 
     }
 }
