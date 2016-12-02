@@ -1,0 +1,2 @@
+# NemesisEvents
+Event management system
