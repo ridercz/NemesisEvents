@@ -8,8 +8,8 @@ using Altairis.NemesisEvents.DAL;
 namespace Altairis.NemesisEvents.DAL.Migrations
 {
     [DbContext(typeof(NemesisEventsContext))]
-    [Migration("20161202181110_EventTweaks")]
-    partial class EventTweaks
+    [Migration("20161202203833_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -105,6 +105,24 @@ namespace Altairis.NemesisEvents.DAL.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Altairis.NemesisEvents.DAL.EventTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("EventId");
+
+                    b.Property<int>("TagId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("EventTags");
+                });
+
             modelBuilder.Entity("Altairis.NemesisEvents.DAL.Role", b =>
                 {
                     b.Property<int>("Id")
@@ -126,6 +144,20 @@ namespace Altairis.NemesisEvents.DAL.Migrations
                         .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
+                });
+
+            modelBuilder.Entity("Altairis.NemesisEvents.DAL.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Altairis.NemesisEvents.DAL.User", b =>
@@ -182,6 +214,42 @@ namespace Altairis.NemesisEvents.DAL.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("Altairis.NemesisEvents.DAL.UserArea", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AreaId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AreaId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserAreas");
+                });
+
+            modelBuilder.Entity("Altairis.NemesisEvents.DAL.UserTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("TagId");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TagId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserTags");
                 });
 
             modelBuilder.Entity("Altairis.NemesisEvents.DAL.Venue", b =>
@@ -320,6 +388,45 @@ namespace Altairis.NemesisEvents.DAL.Migrations
                     b.HasOne("Altairis.NemesisEvents.DAL.Venue", "Venue")
                         .WithMany("Events")
                         .HasForeignKey("VenueId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Altairis.NemesisEvents.DAL.EventTag", b =>
+                {
+                    b.HasOne("Altairis.NemesisEvents.DAL.Event", "Event")
+                        .WithMany("EventTags")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Altairis.NemesisEvents.DAL.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Altairis.NemesisEvents.DAL.UserArea", b =>
+                {
+                    b.HasOne("Altairis.NemesisEvents.DAL.Area", "Area")
+                        .WithMany()
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Altairis.NemesisEvents.DAL.User", "User")
+                        .WithMany("WatchedAreas")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Altairis.NemesisEvents.DAL.UserTag", b =>
+                {
+                    b.HasOne("Altairis.NemesisEvents.DAL.Tag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Altairis.NemesisEvents.DAL.User", "User")
+                        .WithMany("WatchedTags")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
