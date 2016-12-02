@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Altairis.NemesisEvents.Web.Bootstrapper;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +18,9 @@ namespace Altairis.NemesisEvents.Web
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public IContainer ApplicationContainer { get; private set; }
+
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddDataProtection();
             services.AddAuthorization();
@@ -23,13 +28,21 @@ namespace Altairis.NemesisEvents.Web
 
             services.AddDotVVM()
                 .ConfigureTempStorages("temp");
+
+            // configure container
+            var builder = new ContainerBuilder();
+            DataAccessInstaller.Install(builder);
+            ServicesInstaller.Install(builder);
+            WebInstaller.Install(builder);
+            builder.Populate(services);
+            ApplicationContainer = builder.Build();
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
-            var applicationPhysicalPath = env.ContentRootPath;
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
+        {
             // use DotVVM
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(env.ContentRootPath);
 
@@ -38,6 +51,9 @@ namespace Altairis.NemesisEvents.Web
             {
                 FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(env.WebRootPath)
             });
+
+            // dispose container
+            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
         }
     }
 }
