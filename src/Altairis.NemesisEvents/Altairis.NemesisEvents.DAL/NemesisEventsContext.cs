@@ -24,5 +24,13 @@ namespace Altairis.NemesisEvents.DAL {
 
         public DbSet<Attendee> Attendees { get; set; }
 
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<EventTag> EventTags { get; set; }
+
+        public DbSet<UserTag> UserTags { get; set; }
+
+        public DbSet<UserArea> UserAreas { get; set; }
+
     }
 }
