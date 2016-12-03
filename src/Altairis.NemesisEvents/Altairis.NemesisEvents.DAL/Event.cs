@@ -62,5 +62,7 @@ namespace Altairis.NemesisEvents.DAL {
 
         public virtual ICollection<EventTag> EventTags { get; } = new HashSet<EventTag>();
 
+        public virtual ICollection<Attachment> Attachments { get; } = new HashSet<Attachment>();
+
     }
 }
