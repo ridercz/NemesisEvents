@@ -1,9 +1,71 @@
 ﻿@masterPage Views/MasterPage.dotmaster
 @viewModel Altairis.NemesisEvents.Web.ViewModels.DefaultViewModel, Altairis.NemesisEvents.Web
-<dot:Content ContentPlaceHolderID="MainContent">
-    <dot:Repeater  DataSource="{value:UpcomingEvents}">
-        <div>
-            {{value: Name}}
+<dot:Content ContentPlaceHolderID="MainContent" RenderSettings.Mode="Server">
+    
+    <h2>Připravované akce</h2>
+
+    <dot:Repeater DataSource="{value: UpcomingEvents}" class="row event-list">
+        <div class="col-lg-6">
+            <div class="event-box">
+                <h3><dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" Param-Name="{value: NameUrl}" Text="{value: Name}" /></h3>
+
+                <div class="pull-right event-buttons">
+                    <dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" Param-Name="{value: NameUrl}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span> Více informací
+                    </dot:RouteLink>
+                </div>
+
+                <div class="pull-left">
+                    <div class="event-date">
+                        <dot:Literal Text="{value: DateBegin}" FormatString="d. MMMM yyyy H:mm" />, {{value: VenueDisplayName}}
+                    </div>
+                    <div class="event-organizer">
+                        Organizátor: {{value: OrganizerName}}
+                    </div>
+                    <div class="event-tags">
+                        {{value: TagsDisplayText}}
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
         </div>
     </dot:Repeater>
+
+
+    <h2>Materiály ke stažení</h2>
+
+    <dot:Repeater DataSource="{value: RecentEvents}" class="row event-list">
+        <div class="col-lg-6">
+            <div class="event-box">
+                <h3><dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" Param-Name="{value: NameUrl}" Text="{value: Name}" /></h3>
+
+                <div class="pull-right event-buttons">
+                    <dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" Param-Name="{value: NameUrl}" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span> Více informací
+                    </dot:RouteLink>
+                </div>
+
+                <div class="pull-left">
+                    <div class="event-date">
+                        <dot:Literal Text="{value: DateBegin}" FormatString="d. MMMM yyyy H:mm" />, {{value: VenueDisplayName}}
+                    </div>
+                    <div class="event-organizer">
+                        Organizátor: {{value: OrganizerName}}
+                    </div>
+                    <div class="event-tags">
+                        {{value: TagsDisplayText}}
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </dot:Repeater>
+
+    <div class="text-right">
+        <dot:RouteLink RouteName="Archive" Text="Archiv akcí" class="btn btn-primary" />
+    </div>
+
+
 </dot:Content>

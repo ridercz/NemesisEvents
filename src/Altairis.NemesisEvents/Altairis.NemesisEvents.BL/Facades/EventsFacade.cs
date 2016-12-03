@@ -10,11 +10,10 @@ using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.BL.Facades {
     public class EventsFacade : AppCrudFacadeBase<Event, int, EventDTO, EventDetailDTO> {
-        public EventsFacade(EventsQuery query, IRepository<Event, int> repository, Riganti.Utils.Infrastructure.Services.Facades.IEntityDTOMapper<Event, EventDetailDTO> mapper) : base(query, repository, mapper) {
+
+        public EventsFacade(Func<EventsQuery> queryFactory, IRepository<Event, int> repository, Riganti.Utils.Infrastructure.Services.Facades.IEntityDTOMapper<Event, EventDetailDTO> mapper) : base(queryFactory, repository, mapper) {
         }
-
-        public Func<EventsQuery> EventsQueryFactory { get; set; }
-
+        
         public Func<OrganizedEventsQuery> OrganizedEventsQueryFactory { get; set; }
 
         public IList<OrganizedEventDTO> ListEventsOrganizedBy(int userId) {

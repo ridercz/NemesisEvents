@@ -13,15 +13,21 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Nadcházející akce</a></li>
-                <li><a href="#">Archiv</a></li>
-                <li><a href="#">O projektu</a></li>
+                <li class-active="{value: CurrentRoute == 'Default'}">
+                    <dot:RouteLink RouteName="Default" Text="Nadcházející akce" />
+                </li>
+                <li class-active="{value: CurrentRoute == 'Archive'}">
+                    <dot:RouteLink RouteName="Archive" Text="Archiv" />
+                </li>
+                <li>
+                    <a href="#">O projektu</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li Visible="{value: !IsLoggedIn}">
                     <dot:RouteLink RouteName="Login" Text="Přihlásit se" />
                 </li>
-                <li class="dropdown" Visible="{value: IsLoggedIn}">>
+                <li class="dropdown" Visible="{value: IsLoggedIn}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {{value: LoggedUserName}} <span class="caret"></span>
                     </a>

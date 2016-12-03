@@ -10,6 +10,8 @@ namespace Altairis.NemesisEvents.Web
         // For more information about this class, visit https://dotvvm.com/docs/tutorials/basics-project-structure
         public void Configure(DotvvmConfiguration config, string applicationPath)
         {
+            config.DefaultCulture = "cs-CZ";
+
             ConfigureRoutes(config, applicationPath);
             ConfigureControls(config, applicationPath);
             ConfigureResources(config, applicationPath);
@@ -22,6 +24,9 @@ namespace Altairis.NemesisEvents.Web
             config.RouteTable.Add("Login", "prihlaseni", "Views/Login.dothtml");
             config.RouteTable.Add("ForgottenPassword", "zapomenute-heslo", "Views/ForgottenPassword.dothtml");
             config.RouteTable.Add("ResetPassword", "reset-hesla", "Views/ResetPassword.dothtml");
+
+            config.RouteTable.Add("EventDetail", "akce/{Id}/{Name}", "Views/EventDetail.dothtml");
+            config.RouteTable.Add("Archive", "archiv", "Views/Archive.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    

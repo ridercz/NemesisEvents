@@ -1,5 +1,6 @@
 using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.Services.Facades;
+using System;
 
 namespace Altairis.NemesisEvents.BL.Facades
 {
@@ -7,7 +8,7 @@ namespace Altairis.NemesisEvents.BL.Facades
         where TEntity : IEntity<TKey>
         where TDetailDTO : IEntity<TKey>
     {
-        public AppFilteredCrudFacadeBase(IFilteredQuery<TListDTO, TFilterDTO> query, IRepository<TEntity, TKey> repository, IEntityDTOMapper<TEntity, TDetailDTO> mapper) : base(query, repository, mapper)
+        public AppFilteredCrudFacadeBase(Func<IFilteredQuery<TListDTO, TFilterDTO>> queryFactory, IRepository<TEntity, TKey> repository, IEntityDTOMapper<TEntity, TDetailDTO> mapper) : base(queryFactory, repository, mapper)
         {
         }
     }

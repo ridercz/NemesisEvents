@@ -24,6 +24,8 @@ namespace Altairis.NemesisEvents.Web.ViewModels
 
 	    public string LoggedUserName => Context.HttpContext.User.Identity.Name;
 
+        public string CurrentRoute => Context.Route.RouteName;
+
 
         protected bool ExecuteSafe(Action action)
 	    {

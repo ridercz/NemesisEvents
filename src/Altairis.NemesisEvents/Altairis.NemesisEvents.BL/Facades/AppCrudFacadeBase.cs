@@ -10,7 +10,7 @@ namespace Altairis.NemesisEvents.BL.Facades
     public class AppCrudFacadeBase<TEntity, TKey, TListDTO, TDetailDTO> : CrudFacadeBase<TEntity, TKey, TListDTO, TDetailDTO>
         where TEntity : IEntity<TKey>
         where TDetailDTO : IEntity<TKey> {
-        public AppCrudFacadeBase(IQuery<TListDTO> query, IRepository<TEntity, TKey> repository, IEntityDTOMapper<TEntity, TDetailDTO> mapper) : base(query, repository, mapper) {
+        public AppCrudFacadeBase(Func<IQuery<TListDTO>> queryFactory, IRepository<TEntity, TKey> repository, IEntityDTOMapper<TEntity, TDetailDTO> mapper) : base(queryFactory, repository, mapper) {
         }
     }
 }

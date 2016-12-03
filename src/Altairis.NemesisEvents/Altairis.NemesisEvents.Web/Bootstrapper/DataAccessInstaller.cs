@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.EntityFrameworkCore;
+using Riganti.Utils.Infrastructure.AutoMapper;
+using Riganti.Utils.Infrastructure.Services.Facades;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
@@ -52,6 +54,10 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
             builder.RegisterAssemblyTypes(typeof(AppFirstLevelQueryBase<>).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(AppFirstLevelQueryBase<>))
                 .InstancePerDependency();
+
+            builder.RegisterGeneric(typeof(EntityDTOMapper<,>))
+                .As(typeof(IEntityDTOMapper<,>))
+                .SingleInstance();
 
             builder.RegisterType<AppUserStore>()
                 .InstancePerDependency();

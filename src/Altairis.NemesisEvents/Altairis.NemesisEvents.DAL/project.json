@@ -10,7 +10,7 @@
     "Microsoft.EntityFrameworkCore.Tools": "1.1.0-preview4-final",
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
     "Microsoft.EntityFrameworkCore.SqlServer.Design": "1.1.0",
-    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-03" 
+    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-04" 
   },
   "frameworks": {
     "netcoreapp1.0": {

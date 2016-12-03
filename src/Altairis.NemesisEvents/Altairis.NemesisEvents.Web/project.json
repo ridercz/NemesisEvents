@@ -14,9 +14,11 @@
     "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
     "DotVVM": "1.1.0-alpha-r4",
     "DotVVM.AspNetCore": "1.1.0-alpha-r4",
-    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-03",
-    "Riganti.Utils.Infrastructure.Services": "2.0.0-alpha-03",
-    "Riganti.Utils.Infrastructure.AspNetCore": "2.0.0-alpha-03",
+    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-04",
+    "Riganti.Utils.Infrastructure.Services": "2.0.0-alpha-04",
+    "Riganti.Utils.Infrastructure.AspNetCore": "2.0.0-alpha-04",
+    "Riganti.Utils.Infrastructure.DotVVM": "2.0.0-alpha-04",
+    "Riganti.Utils.Infrastructure.AutoMapper": "2.0.0-alpha-04",
     "Autofac.Extensions.DependencyInjection": "4.0.0",
     "Altairis.NemesisEvents.BL": {
       "target": "project"
