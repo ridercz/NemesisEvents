@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.DAL {
-    public class UserTag {
+    public class UserTag : IEntity<int> {
 
         [Key]
         public int Id { get; set; }

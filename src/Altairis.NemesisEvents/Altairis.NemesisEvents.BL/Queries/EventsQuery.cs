@@ -8,7 +8,7 @@ using AutoMapper.QueryableExtensions;
 using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.BL.Queries {
-    public class EventsQuery : AppQueryBase<EventDTO> {
+    public class EventsQuery : AppQueryBase<EventDTO>, IFilteredQuery<EventDTO> {
         public EventsQuery(IUnitOfWorkProvider provider) : base(provider) {
         }
 

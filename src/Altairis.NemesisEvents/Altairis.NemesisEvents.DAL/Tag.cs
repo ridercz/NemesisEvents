@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.DAL {
-    public class Tag {
+    public class Tag : IEntity<int> {
 
         [Key]
         public int Id { get; set; }

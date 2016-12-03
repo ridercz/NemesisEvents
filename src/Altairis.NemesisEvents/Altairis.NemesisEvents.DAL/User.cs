@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.DAL {
-    public class User : IdentityUser<int> {
+    public class User : IdentityUser<int>, IEntity<int> {
 
         [Required, MaxLength(100)]
         public string FullName { get; set; }

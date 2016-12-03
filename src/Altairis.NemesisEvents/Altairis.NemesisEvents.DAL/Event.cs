@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.DAL {
 
-    public class Event {
+    public class Event : IEntity<int> {
         [Key]
         public int Id { get; set; }
 

@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.DAL {
 
-    public class Venue {
+    public class Venue : IEntity<int> {
 
         [Key]
         public int Id { get; set; }
