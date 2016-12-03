@@ -8,8 +8,8 @@ using AutoMapper.QueryableExtensions;
 using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.BL.Queries {
-    public class EventQuery : AppQueryBase<EventDTO> {
-        public EventQuery(IUnitOfWorkProvider provider) : base(provider) {
+    public class EventsQuery : AppQueryBase<EventDTO> {
+        public EventsQuery(IUnitOfWorkProvider provider) : base(provider) {
         }
 
         protected override IQueryable<EventDTO> GetQueryable() {
