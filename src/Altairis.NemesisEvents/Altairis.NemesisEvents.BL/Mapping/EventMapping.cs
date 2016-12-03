@@ -11,6 +11,7 @@ namespace Altairis.NemesisEvents.BL.Mapping {
     public class EventMapping : IMapping {
 
         public void Map(IMapperConfigurationExpression cfg) {
+            // Public
             cfg.CreateMap<Event, PublicUpcomingEventDTO>()
                 .ForMember(e => e.HasAdmissionFee, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)))
                 .ForMember(e => e.Tags, m => m.MapFrom(e => e.EventTags.Select(x => x.Tag.Name)));
@@ -21,6 +22,10 @@ namespace Altairis.NemesisEvents.BL.Mapping {
                 .ForMember(e => e.HasDemo, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Demo)))
                 .ForMember(e => e.HasPhotos, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Photo)))
                 .ForMember(e => e.HasOtherAttachments, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Other)));
+
+            // Admin
+            cfg.CreateMap<Event, EventDTO>()
+                .ForMember(e => e.HasAdmissionFee, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)));
         }
 
     }
