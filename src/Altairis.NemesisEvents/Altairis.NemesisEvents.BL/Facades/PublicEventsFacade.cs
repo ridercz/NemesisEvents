@@ -12,13 +12,13 @@ namespace Altairis.NemesisEvents.BL.Facades {
 
         public PublicArchiveEventsQuery ArchiveQuery { get; set; }
 
-        public IList<PublicUpcomingEventDTO> GetUpcomingEvents() {
+        public IList<PublicUpcomingEventDTO> ListUpcomingEvents() {
             using (var uow = this.UnitOfWorkProvider.Create()) {
                 return this.UpcomingQuery.Execute();
             }
         }
 
-        public IList<PublicArchiveEventDTO> GetArchiveEvents() {
+        public IList<PublicArchiveEventDTO> ListArchiveEvents() {
             using (var uow = this.UnitOfWorkProvider.Create()) {
                 return this.ArchiveQuery.Execute();
             }

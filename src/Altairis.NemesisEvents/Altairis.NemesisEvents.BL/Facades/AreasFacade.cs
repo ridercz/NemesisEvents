@@ -10,7 +10,7 @@ namespace Altairis.NemesisEvents.BL.Facades {
 
         public AreasQuery Query { get; set; }
 
-        public IList<AreaDTO> GetAreas() {
+        public IList<AreaDTO> List() {
             using (var uow = this.UnitOfWorkProvider.Create()) {
                 return this.Query.Execute();
             }

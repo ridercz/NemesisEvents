@@ -15,7 +15,7 @@ namespace Altairis.NemesisEvents.Web.ViewModels {
         public IList<PublicUpcomingEventDTO> UpcomingEvents { get; set; }
 
         public DefaultViewModel(PublicEventsFacade f) {
-            this.UpcomingEvents = f.GetUpcomingEvents();
+            this.UpcomingEvents = f.ListUpcomingEvents();
         }
 
     }

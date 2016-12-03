@@ -10,7 +10,7 @@ namespace Altairis.NemesisEvents.BL.Facades {
 
         public VenuesQuery Query { get; set; }
 
-        public IList<VenueDTO> GetAreas() {
+        public IList<VenueDTO> List() {
             using (var uow = this.UnitOfWorkProvider.Create()) {
                 return this.Query.Execute();
             }
