@@ -5,19 +5,17 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Altairis.NemesisEvents.BL.Facades;
+using Altairis.NemesisEvents.BL.Queries;
 using DotVVM.Framework.ViewModel;
 
-namespace Altairis.NemesisEvents.Web.ViewModels
-{
-    public class DefaultViewModel : DotvvmViewModelBase
-    {
-        
-        public string Title { get; set; }
+namespace Altairis.NemesisEvents.Web.ViewModels {
+    public class DefaultViewModel : MasterPageViewModel {
+
+        public IList<UpcomingEventDTO> UpcomingEvents { get; set; }
 
 
-        public DefaultViewModel(LoginFacade loginFacade)
-        {
-            Title = "Hello from DotVVM!";
+        public DefaultViewModel(PublicEventsFacade f) {
+            this.UpcomingEvents = f.GetUpcomingEvents();
         }
 
     }

@@ -1,15 +1,9 @@
+﻿@masterPage Views/MasterPage.dotmaster
 @viewModel Altairis.NemesisEvents.Web.ViewModels.DefaultViewModel, Altairis.NemesisEvents.Web
-
-<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-	<h1>{{value: Title}}</h1>
-
-</body>
-</html>
+<dot:Content ContentPlaceHolderID="MainContent">
+    <dot:Repeater  DataSource="{value:UpcomingEvents}">
+        <div>
+            {{value: Name}}
+        </div>
+    </dot:Repeater>
+</dot:Content>
