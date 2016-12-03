@@ -14,11 +14,7 @@ namespace Altairis.NemesisEvents.DAL {
         [MaxLength(100)]
         public string CompanyName { get; set; }
 
-        public bool SendSingleMessages { get; set; }
-
-        public bool SendDailyMessages { get; set; }
-
-        public bool SendWeeklyMessages { get; set; }
+        public EmailFrequency EmailFrequency { get; set; }
 
         public virtual ICollection<Event> OwnedEvents { get; } = new HashSet<Event>();
 
@@ -28,5 +24,12 @@ namespace Altairis.NemesisEvents.DAL {
 
         public virtual ICollection<UserTag> WatchedTags { get; } = new HashSet<UserTag>();
 
+    }
+
+    public enum EmailFrequency {
+        None = 0,
+        Separate = 1,
+        Daily = 2,
+        Weekly = 3
     }
 }
