@@ -8,9 +8,10 @@ using Altairis.NemesisEvents.DAL;
 namespace Altairis.NemesisEvents.DAL.Migrations
 {
     [DbContext(typeof(NemesisEventsContext))]
-    partial class NemesisEventsContextModelSnapshot : ModelSnapshot
+    [Migration("20161203165220_Add_User_Dates")]
+    partial class Add_User_Dates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -206,8 +207,6 @@ namespace Altairis.NemesisEvents.DAL.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<int>("EmailFrequency");
-
-                    b.Property<bool>("Enabled");
 
                     b.Property<string>("FullName")
                         .IsRequired()

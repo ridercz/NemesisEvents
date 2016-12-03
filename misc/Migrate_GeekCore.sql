@@ -1,4 +1,5 @@
 -- Migrate Areas
+PRINT 'Migrating areas...'
 SET IDENTITY_INSERT NemesisEvents.dbo.Areas ON
 INSERT
 	INTO NemesisEvents.dbo.Areas (Id, Name)
@@ -6,6 +7,7 @@ INSERT
 SET IDENTITY_INSERT NemesisEvents.dbo.Areas OFF
 
 -- Migrate Venues
+PRINT 'Migrating venues...'
 SET IDENTITY_INSERT NemesisEvents.dbo.Venues ON
 INSERT
 	INTO NemesisEvents.dbo.Venues (Id, AreaId, City, Description, Latitude, Longitude, Name, StreetAddress)
@@ -17,6 +19,7 @@ UPDATE NemesisEvents.dbo.Venues SET Name = RIGHT(Name, LEN(Name) - LEN(City) - 3
 UPDATE NemesisEvents.dbo.Venues SET City = Name WHERE City IS NULL AND AreaId > 1
 
 -- Migrate Users
+PRINT 'Migrating users...'
 INSERT
 	INTO NemesisEvents.dbo.AspNetUsers (
 		AccessFailedCount,
@@ -26,12 +29,13 @@ INSERT
 		NormalizedEmail,
 		NormalizedUserName,
 		PhoneNumberConfirmed,
-		SendDailyMessages,
-		SendSingleMessages,
-		SendWeeklyMessages,
 		TwoFactorEnabled,
 		UserName,
-		FullName)
+		FullName, 
+		Enabled,
+		DateCreated,
+		DateLastLogin, 
+		SecurityStamp)
 	SELECT
 		AccessFailedCount = 0,
 		Email = U.Email,
@@ -40,15 +44,23 @@ INSERT
 		NormalizedEmail = U.Email,
 		NormalizedUserName = U.UserName,
 		PhoneNumberConfirmed = 0,
-		U.SendDailyMessages,
-		U.SendSingleMessages,
-		U.SendWeeklyMessages,
 		TwoFactorEnabled = 0,
 		UserName,
-		FullName = ISNULL(U.DisplayName, U.UserName)
+		FullName = ISNULL(U.DisplayName, U.UserName),
+		Enabled = U.IsApproved,
+		U.DateCreated,
+		DateLastLogin = ISNULL(U.DateLastLogin, U.DateCreated),
+		SecurityStamp = NEWID()
 	FROM Users AS U
 
+-- Migrate email frequency
+PRINT 'Updating user email frequency...'
+UPDATE NemesisEvents.dbo.AspNetUsers SET EmailFrequency = 3 WHERE UserName IN (SELECT UserName FROM Users WHERE SendWeeklyMessages = 1)
+UPDATE NemesisEvents.dbo.AspNetUsers SET EmailFrequency = 2 WHERE UserName IN (SELECT UserName FROM Users WHERE SendDailyMessages = 1)
+UPDATE NemesisEvents.dbo.AspNetUsers SET EmailFrequency = 1 WHERE UserName IN (SELECT UserName FROM Users WHERE SendSingleMessages = 1)
+
 -- Migrate roles
+PRINT 'Creating roles if needed...'
 DECLARE @AdmRoleId int
 SELECT @AdmRoleId = Id FROM NemesisEvents.dbo.AspNetRoles WHERE Name = 'Administrators'
 IF (@AdmRoleId IS NULL) BEGIN
@@ -61,10 +73,12 @@ IF (@OrgRoleId IS NULL) BEGIN
 	INSERT INTO NemesisEvents.dbo.AspNetRoles VALUES (NEWID(), 'Organizers', 'organizers')
 	SELECT @OrgRoleId = SCOPE_IDENTITY()
 END
+PRINT 'Updating user roles...'
 INSERT INTO NemesisEvents.dbo.AspNetUserRoles SELECT UserId = Id, RoleId = @AdmRoleId FROM NemesisEvents.dbo.AspNetUsers WHERE UserName IN (SELECT UserName FROM Users WHERE IsAdministrator = 1)
 INSERT INTO NemesisEvents.dbo.AspNetUserRoles SELECT UserId = Id, RoleId = @OrgRoleId FROM NemesisEvents.dbo.AspNetUsers WHERE UserName IN (SELECT UserName FROM Users WHERE IsOrganizer = 1)
 
 -- Migrate Events
+PRINT 'Migrating events...'
 SET IDENTITY_INSERT NemesisEvents.dbo.Events ON
 INSERT
 	INTO NemesisEvents.dbo.Events (
@@ -78,7 +92,7 @@ INSERT
 	SELECT
 		Id = E.EventId,
 		AdmissionFee = LTRIM(STR(AdmissionFee) + ' Kè'),
-		AllowRegistration, DateBegin, DateEnd, DateCreated, Description, InvitationSent, Name,
+		AllowRegistration, DateBegin, DateEnd, E.DateCreated, Description, InvitationSent, Name,
 		OrganizerName = Organizer,
 		OwnerId = U.Id,
 		UseRegistration, VenueId
@@ -87,6 +101,7 @@ INSERT
 SET IDENTITY_INSERT NemesisEvents.dbo.Events OFF
 
 -- Migrate Attendees
+PRINT 'Migrating attendees...'
 INSERT
 	INTO NemesisEvents.dbo.Attendees (DateRegistered, EventId, UserId)
 	SELECT
@@ -97,6 +112,7 @@ INSERT
 	LEFT JOIN NemesisEvents.dbo.AspNetUsers AS U ON A.User_UserName = U.UserName
 
 -- Migrate UserAreas
+PRINT 'Migrating user watched areas...'
 INSERT
 	INTO NemesisEvents.dbo.UserAreas(AreaId, UserId)
 	SELECT
@@ -106,12 +122,14 @@ INSERT
 	LEFT JOIN NemesisEvents.dbo.AspNetUsers AS U ON A.User_UserName = U.UserName
 
 -- Normalize users
+PRINT 'Finding duplicate users...'
 SELECT U.Id, U.UserName, U.Email, A.Count
 FROM NemesisEvents.dbo.AspNetUsers AS U
 LEFT JOIN (SELECT UserId, COUNT(*) AS Count FROM NemesisEvents.dbo.Attendees GROUP BY UserId) AS A ON U.Id = A.UserId
 WHERE Email IN (SELECT Email FROM NemesisEvents.dbo.AspNetUsers GROUP BY Email HAVING COUNT(*) > 1)
 ORDER BY U.Email, Id
 
+PRINT 'Consolidating duplicate users...'
 UPDATE NemesisEvents.dbo.Attendees SET UserId = 83   WHERE UserId = 120
 UPDATE NemesisEvents.dbo.Attendees SET UserId = 2829 WHERE UserId = 3663
 UPDATE NemesisEvents.dbo.Attendees SET UserId = 253  WHERE UserId = 3149
@@ -130,16 +148,20 @@ UPDATE NemesisEvents.dbo.UserAreas SET UserId = 1458 WHERE UserId = 4065
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4286 WHERE UserId = 4659
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4477 WHERE UserId = 4408
 
+PRINT 'Deleting duplicate users...'
 DELETE FROM NemesisEvents.dbo.AspNetUsers WHERE Id IN (120, 3663, 3149, 3604, 3526, 4065, 4659, 4408)
 
+PRINT 'Changing user names to email addresses...'
 UPDATE NemesisEvents.dbo.AspNetUsers SET UserName = Email, NormalizedUserName = Email
 
 -- Add tags
+PRINT 'Creating tags...'
 IF NOT EXISTS (SELECT * FROM NemesisEvents.dbo.Tags WHERE Name = 'Vývojáøi')  INSERT INTO NemesisEvents.dbo.Tags VALUES ('Vývojáøi')
 IF NOT EXISTS (SELECT * FROM NemesisEvents.dbo.Tags WHERE Name = 'IT profesionálové')  INSERT INTO NemesisEvents.dbo.Tags VALUES ('IT profesionálové')
 IF NOT EXISTS (SELECT * FROM NemesisEvents.dbo.Tags WHERE Name = 'Uživatelé')  INSERT INTO NemesisEvents.dbo.Tags VALUES ('Uživatelé')
 
 -- Add all tags to all users
+PRINT 'Adding all tags to all users...'
 INSERT
 	INTO NemesisEvents.dbo.UserTags (UserId, TagId)
 	SELECT

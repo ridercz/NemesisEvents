@@ -16,6 +16,12 @@ namespace Altairis.NemesisEvents.DAL {
 
         public EmailFrequency EmailFrequency { get; set; }
 
+        public DateTime DateCreated { get; set; }
+
+        public DateTime DateLastLogin { get; set; }
+
+        public bool Enabled { get; set; }
+
         public virtual ICollection<Event> OwnedEvents { get; } = new HashSet<Event>();
 
         public virtual ICollection<Attendee> Attendances { get; } = new HashSet<Attendee>();
