@@ -16,6 +16,12 @@ namespace Altairis.NemesisEvents.BL.DTO {
 
         public string CompanyName { get; set; }
 
+        public bool Enabled { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
+        public DateTime DateLastLogin { get; set; }
+
         public EmailFrequency EmailFrequency { get; set; }
 
         public int OwnedEventsCount { get; set; }

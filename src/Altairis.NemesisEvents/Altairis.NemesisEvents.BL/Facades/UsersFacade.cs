@@ -10,9 +10,11 @@ namespace Altairis.NemesisEvents.BL.Facades {
 
         public Func<UsersQuery> UsersQueryFactory { get; set; }
 
-        public IList<UserDTO> List() {
+        public IList<UserDTO> List(bool includeDisabled = false, bool includeUnconfirmed = false) {
             using (var uow = this.UnitOfWorkProvider.Create()) {
                 var q = this.UsersQueryFactory();
+                q.IncludeDisabled = includeDisabled;
+                q.IncludeUnconfirmed = includeUnconfirmed;
                 return q.Execute();
             }
         }
