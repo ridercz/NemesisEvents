@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Altairis.NemesisEvents.BL.DTO {
-    public class ArchiveEventDTO {
+    public class PublicArchiveEventDTO {
 
         public int Id { get; set; }
 

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 namespace Altairis.NemesisEvents.BL.DTO {
-    public class UpcomingEventDTO {
+    public class PublicUpcomingEventDTO {
 
         public int Id { get; set; }
 
