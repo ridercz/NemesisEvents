@@ -11,11 +11,12 @@ namespace Altairis.NemesisEvents.BL.Queries {
         public PublicArchiveEventsQuery(IUnitOfWorkProvider provider) : base(provider) {
         }
 
+        public int AttendingUserId { get; set; }
+
         protected override IQueryable<PublicArchiveEventDTO> GetQueryable() {
-            return this.Context.Events
-                .Where(x => x.DateEnd <= DateTime.Now)
-                .OrderByDescending(x => x.DateEnd)
-                .ProjectTo<PublicArchiveEventDTO>();
+            var events = this.Context.Events.Where(x => x.DateEnd <= DateTime.Now);
+            if (this.AttendingUserId > 0) events = events.Where(x => x.Attendees.Any(a => a.UserId == this.AttendingUserId));
+            return events.OrderByDescending(x => x.DateBegin).ProjectTo<PublicArchiveEventDTO>();
         }
     }
 }
