@@ -8,6 +8,8 @@ namespace Altairis.NemesisEvents.Web.ViewModels
 {
 	public class MasterPageViewModel : DotvvmViewModelBase
 	{
+		public string Title { get; set; } = "Nemesis Events";
+
 	}
 }
 
