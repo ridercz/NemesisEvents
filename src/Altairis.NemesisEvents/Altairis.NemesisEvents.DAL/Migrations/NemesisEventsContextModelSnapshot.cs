@@ -2,11 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Altairis.NemesisEvents.DAL;
 
-namespace Altairis.NemesisEvents.DAL.Migrations
-{
+namespace Altairis.NemesisEvents.DAL.Migrations {
     [DbContext(typeof(NemesisEventsContext))]
     partial class NemesisEventsContextModelSnapshot : ModelSnapshot
     {
