@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <title>{{value: Title}}</title>
-    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.min.css" rel="stylesheet" />
 </head>
-<body>
+<body Validator.InvalidCssClass="has-error" Validator.SetToolTipText="true">
     <div class="container">
 
         <cc:Menu />

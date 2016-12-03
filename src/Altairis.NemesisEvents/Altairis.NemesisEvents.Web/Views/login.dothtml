@@ -1,0 +1,35 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.LoginViewModel, Altairis.NemesisEvents.Web
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <h2>Přihlášení</h2>
+
+    <cc:Alerts />
+
+    <div class="form form-narrow" DataContext="{value: Data}">
+        <div class="form-group">
+            <label class="control-label">E-mailová adresa</label>
+            <div Validator.Value="{value: Email}">
+                <dot:TextBox Text="{value: Email}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Heslo</label>
+            <div Validator.Value="{value: Password}">
+                <dot:TextBox Text="{value: Password}" Type="Password" class="form-control" />
+            </div>
+        </div>
+
+        <div class="text-center">
+            <dot:RouteLink RouteName="ForgottenPassword" Text="Zapomenuté heslo" />
+        </div>
+    </div>
+
+    <div>
+        <dot:Button Text="Přihlásit se" Click="{command: Login()}" class="btn btn-primary" />
+    </div>
+
+</dot:Content>
+

@@ -18,9 +18,13 @@
                 <li><a href="#">O projektu</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Přihlásit se</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Altair <span class="caret"></span></a>
+                <li Visible="{value: !IsLoggedIn}">
+                    <dot:RouteLink RouteName="Login" Text="Přihlásit se" />
+                </li>
+                <li class="dropdown" Visible="{value: IsLoggedIn}">>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                        {{value: LoggedUserName}} <span class="caret"></span>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Můj profil</a></li>
                         <li><a href="#">Moje akce</a></li>

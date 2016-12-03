@@ -9,6 +9,7 @@ using Altairis.NemesisEvents.BL.Repositories;
 using Altairis.NemesisEvents.BL.Services;
 using Altairis.NemesisEvents.DAL;
 using Autofac;
+using Autofac.Builder;
 using Autofac.Core;
 using Autofac.Core.Registration;
 using Microsoft.AspNetCore.Http;

@@ -1,5 +1,7 @@
 using System.Reflection;
+using Altairis.NemesisEvents.BL.Services.Web;
 using Autofac;
+using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 
@@ -16,6 +18,10 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
             builder.RegisterAssemblyTypes(typeof(WebInstaller).GetTypeInfo().Assembly)
                 .AssignableTo<IDotvvmPresenter>()
                 .InstancePerDependency();
+
+            builder.Register(c => new WebRouteBuilder("http://localhost:5194/", c.Resolve<DotvvmConfiguration>()))
+                .As<IWebRouteBuilder>()
+                .SingleInstance();
         }
     }
 }
