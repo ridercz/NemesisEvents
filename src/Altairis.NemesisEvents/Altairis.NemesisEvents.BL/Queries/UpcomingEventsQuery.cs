@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Altairis.NemesisEvents.BL.DTO;
 using AutoMapper.QueryableExtensions;
 using Riganti.Utils.Infrastructure.Core;
 
