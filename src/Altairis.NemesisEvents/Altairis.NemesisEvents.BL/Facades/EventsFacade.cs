@@ -8,11 +8,21 @@ using Altairis.NemesisEvents.BL.Queries;
 namespace Altairis.NemesisEvents.BL.Facades {
     public class EventsFacade : AppFacadeBase {
 
-        public EventQuery Query { get; set; }
+        public Func<EventsQuery> EventsQueryFactory { get; set; }
+
+        public Func<OrganizedEventsQuery> OrganizedEventsQueryFactory { get; set; }
 
         public IList<EventDTO> List() {
             using (var uow = this.UnitOfWorkProvider.Create()) {
-                return this.Query.Execute();
+                return this.EventsQueryFactory().Execute();
+            }
+        }
+
+        public IList<OrganizedEventDTO> ListEventsOrganizedBy(int userId) {
+            using (var uow = this.UnitOfWorkProvider.Create()) {
+                var q = this.OrganizedEventsQueryFactory();
+                q.UserId = userId;
+                return q.Execute();
             }
         }
 

@@ -26,6 +26,12 @@ namespace Altairis.NemesisEvents.BL.Mapping {
             // Admin
             cfg.CreateMap<Event, EventDTO>()
                 .ForMember(e => e.HasAdmissionFee, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)));
+            cfg.CreateMap<Event, OrganizedEventDTO>()
+                .ForMember(e => e.HasVideo, m => m.MapFrom(e => !string.IsNullOrEmpty(e.VideoUrl)))
+                .ForMember(e => e.HasSlides, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Slides)))
+                .ForMember(e => e.HasDemo, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Demo)))
+                .ForMember(e => e.HasPhotos, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Photo)))
+                .ForMember(e => e.HasOtherAttachments, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Other)));
         }
 
     }
