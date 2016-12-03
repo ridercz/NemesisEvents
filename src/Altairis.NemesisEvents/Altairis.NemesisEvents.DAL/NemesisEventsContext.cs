@@ -32,5 +32,7 @@ namespace Altairis.NemesisEvents.DAL {
 
         public DbSet<UserArea> UserAreas { get; set; }
 
+        public DbSet<Attachment> Attachments { get; set; }
+
     }
 }
