@@ -8,9 +8,10 @@ using Altairis.NemesisEvents.DAL;
 namespace Altairis.NemesisEvents.DAL.Migrations
 {
     [DbContext(typeof(NemesisEventsContext))]
-    partial class NemesisEventsContextModelSnapshot : ModelSnapshot
+    [Migration("20161203144006_Add_User_FullAndCompanyName")]
+    partial class Add_User_FullAndCompanyName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
@@ -201,8 +202,6 @@ namespace Altairis.NemesisEvents.DAL.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("EmailFrequency");
-
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasMaxLength(100);
@@ -224,6 +223,12 @@ namespace Altairis.NemesisEvents.DAL.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("SendDailyMessages");
+
+                    b.Property<bool>("SendSingleMessages");
+
+                    b.Property<bool>("SendWeeklyMessages");
 
                     b.Property<bool>("TwoFactorEnabled");
 

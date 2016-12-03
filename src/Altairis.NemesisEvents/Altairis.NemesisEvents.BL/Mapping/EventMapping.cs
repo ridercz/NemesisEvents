@@ -11,11 +11,22 @@ namespace Altairis.NemesisEvents.BL.Mapping {
     public class EventMapping : IMapping {
 
         public void Map(IMapperConfigurationExpression cfg) {
-            cfg.CreateMap<Event, UpcomingEventDTO>()
-                .ForMember(e => e.IsFree, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)))
+            // Public
+            cfg.CreateMap<Event, PublicUpcomingEventDTO>()
+                .ForMember(e => e.HasAdmissionFee, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)))
                 .ForMember(e => e.Tags, m => m.MapFrom(e => e.EventTags.Select(x => x.Tag.Name)));
-            cfg.CreateMap<Event, ArchiveEventDTO>()
+            cfg.CreateMap<Event, PublicArchiveEventDTO>()
                 .ForMember(e => e.Tags, m => m.MapFrom(e => e.EventTags.Select(x => x.Tag.Name)))
+                .ForMember(e => e.HasVideo, m => m.MapFrom(e => !string.IsNullOrEmpty(e.VideoUrl)))
+                .ForMember(e => e.HasSlides, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Slides)))
+                .ForMember(e => e.HasDemo, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Demo)))
+                .ForMember(e => e.HasPhotos, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Photo)))
+                .ForMember(e => e.HasOtherAttachments, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Other)));
+
+            // Admin
+            cfg.CreateMap<Event, EventDTO>()
+                .ForMember(e => e.HasAdmissionFee, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)));
+            cfg.CreateMap<Event, OrganizedEventDTO>()
                 .ForMember(e => e.HasVideo, m => m.MapFrom(e => !string.IsNullOrEmpty(e.VideoUrl)))
                 .ForMember(e => e.HasSlides, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Slides)))
                 .ForMember(e => e.HasDemo, m => m.MapFrom(e => e.Attachments.Any(a => a.Type == AttachmentType.Demo)))

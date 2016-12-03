@@ -30,7 +30,8 @@ INSERT
 		SendSingleMessages,
 		SendWeeklyMessages,
 		TwoFactorEnabled,
-		UserName)
+		UserName,
+		FullName)
 	SELECT
 		AccessFailedCount = 0,
 		Email = U.Email,
@@ -43,7 +44,8 @@ INSERT
 		U.SendSingleMessages,
 		U.SendWeeklyMessages,
 		TwoFactorEnabled = 0,
-		UserName
+		UserName,
+		FullName = ISNULL(U.DisplayName, U.UserName)
 	FROM Users AS U
 
 -- Migrate roles
@@ -129,6 +131,8 @@ UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4286 WHERE UserId = 4659
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4477 WHERE UserId = 4408
 
 DELETE FROM NemesisEvents.dbo.AspNetUsers WHERE Id IN (120, 3663, 3149, 3604, 3526, 4065, 4659, 4408)
+
+UPDATE NemesisEvents.dbo.AspNetUsers SET UserName = Email, NormalizedUserName = Email
 
 -- Add tags
 IF NOT EXISTS (SELECT * FROM NemesisEvents.dbo.Tags WHERE Name = 'Vývojáøi')  INSERT INTO NemesisEvents.dbo.Tags VALUES ('Vývojáøi')

@@ -8,19 +8,23 @@ using Altairis.NemesisEvents.BL.Queries;
 namespace Altairis.NemesisEvents.BL.Facades {
     public class PublicEventsFacade : AppFacadeBase {
 
-        public UpcomingEventsQuery UpcomingQuery { get; set; }
+        public Func<PublicUpcomingEventsQuery> UpcomingQueryFactory { get; set; }
 
-        public ArchiveEventsQuery ArchiveQuery { get; set; }
+        public Func<PublicArchiveEventsQuery> ArchiveQueryFactory { get; set; }
 
-        public IList<UpcomingEventDTO> GetUpcomingEvents() {
+        public IList<PublicUpcomingEventDTO> ListUpcomingEvents(int attendingUserId = 0) {
             using (var uow = this.UnitOfWorkProvider.Create()) {
-                return this.UpcomingQuery.Execute();
+                var q = this.UpcomingQueryFactory();
+                if (attendingUserId > 0) q.AttendingUserId = attendingUserId;
+                return q.Execute();
             }
         }
 
-        public IList<ArchiveEventDTO> GetArchiveEvents() {
+        public IList<PublicArchiveEventDTO> ListArchiveEvents(int attendingUserId = 0) {
             using (var uow = this.UnitOfWorkProvider.Create()) {
-                return this.ArchiveQuery.Execute();
+                var q = this.ArchiveQueryFactory();
+                if (attendingUserId > 0) q.AttendingUserId = attendingUserId;
+                return q.Execute();
             }
         }
 

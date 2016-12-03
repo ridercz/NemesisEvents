@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Altairis.NemesisEvents.BL.DTO {
-    public class ArchiveEventDTO {
+    public class OrganizedEventDTO {
 
         public int Id { get; set; }
 
@@ -14,9 +14,25 @@ namespace Altairis.NemesisEvents.BL.DTO {
 
         public DateTime DateEnd { get; set; }
 
+        public string VenueCity { get; set; }
+
+        public string VenueName { get; set; }
+
+        public string VenueDisplayName => string.Join(" - ", this.VenueCity, this.VenueName);
+
+        public bool UseRegistration { get; set; }
+
+        public bool AllowRegistration { get; set; }
+
         public string OrganizerName { get; set; }
 
-        public IEnumerable<string> Tags { get; set; }
+        public bool HasAdmissionFee { get; set; }
+
+        public DateTime DateCreated { get; set; }
+
+        public bool InvitationSent { get; set; }
+
+        public int AttendeesCount { get; set; }
 
         public bool HasVideo { get; set; }
 
@@ -27,8 +43,6 @@ namespace Altairis.NemesisEvents.BL.DTO {
         public bool HasPhotos { get; set; }
 
         public bool HasOtherAttachments { get; set; }
-
-        public string TagsDisplayText => string.Join(", ", this.Tags);
 
     }
 }
