@@ -17,7 +17,11 @@ namespace Altairis.NemesisEvents.Web
 
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
-            config.RouteTable.Add("Default", "", "Views/default.dothtml");
+            config.RouteTable.Add("Default", "", "Views/Default.dothtml");
+
+            config.RouteTable.Add("Login", "prihlaseni", "Views/Login.dothtml");
+            config.RouteTable.Add("ForgottenPassword", "zapomenute-heslo", "Views/ForgottenPassword.dothtml");
+            config.RouteTable.Add("ResetPassword", "reset-hesla", "Views/ResetPassword.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
@@ -27,6 +31,7 @@ namespace Altairis.NemesisEvents.Web
         {
             // register code-only controls and markup controls
             config.Markup.AddMarkupControl("cc", "Menu", "Controls/Menu.dotcontrol");
+            config.Markup.AddMarkupControl("cc", "Alerts", "Controls/Alerts.dotcontrol");
         }
 
         private void ConfigureResources(DotvvmConfiguration config, string applicationPath)

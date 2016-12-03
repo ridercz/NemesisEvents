@@ -15,6 +15,8 @@ using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Security;
 using AutoMapper;
 using Altairis.NemesisEvents.BL.Mapping;
+using Altairis.NemesisEvents.BL.Services;
+using Altairis.NemesisEvents.DAL;
 
 namespace Altairis.NemesisEvents.Web
 {
@@ -30,6 +32,18 @@ namespace Altairis.NemesisEvents.Web
 
             services.AddDotVVM()
                 .ConfigureTempStorages("temp");
+
+            services.AddAuthentication(options =>
+                {
+                    options.SignInScheme = AppUserManager.AuthenticationScheme;
+                });
+            services.AddIdentity<User, Role>(options =>
+                {
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 8;
+                    options.User.RequireUniqueEmail = true;
+                })
+                .AddDefaultTokenProviders();
 
             // configure container
             var builder = new ContainerBuilder();

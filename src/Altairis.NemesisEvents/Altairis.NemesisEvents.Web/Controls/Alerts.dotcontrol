@@ -1,0 +1,4 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.MasterPageViewModel, Altairis.NemesisEvents.Web
+
+<div class="alert alert-danger" Visible="{value: ErrorMessage != null}">{{value: ErrorMessage}}</div>
+<div class="alert alert-success" Visible="{value: SuccessMessage != null}">{{value: SuccessMessage}}</div>

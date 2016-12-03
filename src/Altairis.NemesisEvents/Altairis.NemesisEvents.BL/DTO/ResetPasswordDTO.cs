@@ -4,8 +4,8 @@ namespace Altairis.NemesisEvents.BL.DTO
 {
     public class ResetPasswordDTO
     {
-
         [Required]
+        [Compare(nameof(PasswordConfirmation))]
         public string Password { get; set; }
 
         [Required]

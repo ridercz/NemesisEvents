@@ -24,6 +24,9 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
             builder.RegisterType<SendGridMailSender>()
                 .As<IMailSender>()
                 .SingleInstance();
+
+            builder.RegisterType<AppMailerService>()
+                .SingleInstance();
         }
     }
 }
