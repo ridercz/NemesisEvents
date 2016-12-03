@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Altairis.NemesisEvents.DAL {
     public class User : IdentityUser<int> {
+
+        [Required, MaxLength(100)]
+        public string FullName { get; set; }
+
+        [MaxLength(100)]
+        public string CompanyName { get; set; }
 
         public bool SendSingleMessages { get; set; }
 

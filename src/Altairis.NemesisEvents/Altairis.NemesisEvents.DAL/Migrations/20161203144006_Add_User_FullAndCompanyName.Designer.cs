@@ -8,9 +8,10 @@ using Altairis.NemesisEvents.DAL;
 namespace Altairis.NemesisEvents.DAL.Migrations
 {
     [DbContext(typeof(NemesisEventsContext))]
-    partial class NemesisEventsContextModelSnapshot : ModelSnapshot
+    [Migration("20161203144006_Add_User_FullAndCompanyName")]
+    partial class Add_User_FullAndCompanyName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.0-rtm-22752")
