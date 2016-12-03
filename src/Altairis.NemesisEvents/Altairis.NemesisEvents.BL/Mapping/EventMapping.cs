@@ -8,9 +8,9 @@ using Altairis.NemesisEvents.DAL;
 using AutoMapper;
 
 namespace Altairis.NemesisEvents.BL.Mapping {
-    public static class EventMapping {
+    public class EventMapping : IMapping {
 
-        public static void Map(IMapperConfigurationExpression cfg) {
+        public void Map(IMapperConfigurationExpression cfg) {
             cfg.CreateMap<Event, UpcomingEventDTO>()
                 .ForMember(e => e.IsFree, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)))
                 .ForMember(e => e.Tags, m => m.MapFrom(e => e.EventTags.Select(x => x.Tag.Name)));

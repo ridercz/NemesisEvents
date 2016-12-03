@@ -1,8 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Altairis.NemesisEvents.BL.Queries {
+namespace Altairis.NemesisEvents.BL.DTO {
     public class UpcomingEventDTO {
 
         public int Id { get; set; }
