@@ -12,7 +12,7 @@ namespace Altairis.NemesisEvents.BL.Mapping {
 
         public void Map(IMapperConfigurationExpression cfg) {
             cfg.CreateMap<Event, PublicUpcomingEventDTO>()
-                .ForMember(e => e.IsFree, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)))
+                .ForMember(e => e.HasAdmissionFee, m => m.MapFrom(e => !string.IsNullOrEmpty(e.AdmissionFee)))
                 .ForMember(e => e.Tags, m => m.MapFrom(e => e.EventTags.Select(x => x.Tag.Name)));
             cfg.CreateMap<Event, PublicArchiveEventDTO>()
                 .ForMember(e => e.Tags, m => m.MapFrom(e => e.EventTags.Select(x => x.Tag.Name)))

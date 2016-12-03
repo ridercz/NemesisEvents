@@ -20,7 +20,7 @@ namespace Altairis.NemesisEvents.BL.DTO {
 
         public string OrganizerName { get; set; }
 
-        public bool IsFree { get; set; }
+        public bool HasAdmissionFee { get; set; }
 
         public IEnumerable<string> Tags { get; set;  }
 
