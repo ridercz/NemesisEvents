@@ -30,7 +30,8 @@ INSERT
 		SendSingleMessages,
 		SendWeeklyMessages,
 		TwoFactorEnabled,
-		UserName)
+		UserName, 
+		FullName)
 	SELECT
 		AccessFailedCount = 0,
 		Email = U.Email,
@@ -43,7 +44,8 @@ INSERT
 		U.SendSingleMessages,
 		U.SendWeeklyMessages,
 		TwoFactorEnabled = 0,
-		UserName
+		UserName,
+		FullName = ISNULL(U.DisplayName, U.UserName)
 	FROM Users AS U
 
 -- Migrate roles
