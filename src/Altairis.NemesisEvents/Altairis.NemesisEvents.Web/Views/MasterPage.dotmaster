@@ -4,10 +4,19 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <dot:ContentPlaceHolder ID="MainContent">
-    </dot:ContentPlaceHolder>
+    <div class="container">
+
+        <cc:Menu />
+
+        <dot:ContentPlaceHolder ID="MainContent">
+        </dot:ContentPlaceHolder>
+
+    </div>
+
+    <dot:RequiredResource Name="bootstrap" />
 </body>
 </html>
 

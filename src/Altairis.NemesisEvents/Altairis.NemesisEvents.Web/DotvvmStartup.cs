@@ -1,5 +1,6 @@
 using DotVVM.Framework;
 using DotVVM.Framework.Configuration;
+using DotVVM.Framework.ResourceManagement;
 using DotVVM.Framework.Routing;
 
 namespace Altairis.NemesisEvents.Web
@@ -25,11 +26,17 @@ namespace Altairis.NemesisEvents.Web
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
         {
             // register code-only controls and markup controls
+            config.Markup.AddMarkupControl("cc", "Menu", "Controls/Menu.dotcontrol");
         }
 
         private void ConfigureResources(DotvvmConfiguration config, string applicationPath)
         {
             // register custom resources and adjust paths to the built-in resources
+            config.Resources.Register("bootstrap", new ScriptResource()
+            {
+                Url = "~/js/bootstrap.min.js",
+                Dependencies = new [] { "jquery" }
+            });
         }
     }
 }
