@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Altairis.NemesisEvents.BL.DTO;
-using Altairis.NemesisEvents.BL.Queries;
 using Altairis.NemesisEvents.DAL;
 using Riganti.Utils.Infrastructure.AutoMapper;
 using AutoMapper;
