@@ -16,6 +16,7 @@ namespace Altairis.NemesisEvents.Web.ViewModels {
         [Bind(Direction.None)]
         public IOptions<AppConfig> Configuration { get; set; }
 
+
         public string Title { get; set; } = "Nemesis Events";
 
         public string FormattedTitle => string.Format(this.Configuration.Value.TitleFormatString, this.Title);

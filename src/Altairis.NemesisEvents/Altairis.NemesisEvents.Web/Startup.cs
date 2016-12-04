@@ -17,6 +17,7 @@ using AutoMapper;
 using Altairis.NemesisEvents.BL.Mapping;
 using Altairis.NemesisEvents.BL.Services;
 using Altairis.NemesisEvents.DAL;
+using DotVVM.Framework.ViewModel.Serialization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -43,6 +44,7 @@ namespace Altairis.NemesisEvents.Web {
 
             services.AddDotVVM()
                 .ConfigureTempStorages("temp");
+            services.AddSingleton<IViewModelLoader>(p => new AutofacViewModelLoader(p, this.ApplicationContainer));
 
             services.AddIdentity<User, Role>(options => {
                 options.Password.RequireNonAlphanumeric = false;

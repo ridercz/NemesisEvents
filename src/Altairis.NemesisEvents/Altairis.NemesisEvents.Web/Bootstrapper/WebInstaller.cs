@@ -11,18 +11,12 @@ using Riganti.Utils.Infrastructure.Services;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper {
     public class WebInstaller {
-        public static void Install(ContainerBuilder builder) {
+        public static void Install(ContainerBuilder builder)
+        {
             builder.RegisterAssemblyTypes(typeof(WebInstaller).GetTypeInfo().Assembly)
                 .AssignableTo<DotvvmViewModelBase>()
-                //.PropertiesAutowired()
-                .InstancePerDependency()
-                .OnActivated(args => {
-                    // Autofac does not support property injection in base classes
-                    var vm = args.Instance as ViewModels.MasterPageViewModel;
-                    if (vm != null) {
-                        vm.Configuration = args.Context.Resolve<IOptions<AppConfig>>();
-                    }
-                });
+                .PropertiesAutowired()
+                .InstancePerDependency();
 
             builder.RegisterAssemblyTypes(typeof(WebInstaller).GetTypeInfo().Assembly)
                 .AssignableTo<IDotvvmPresenter>()
