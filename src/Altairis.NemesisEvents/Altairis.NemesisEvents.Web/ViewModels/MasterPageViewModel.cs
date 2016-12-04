@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Altairis.NemesisEvents.BL.Services;
+using Altairis.NemesisEvents.DAL;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using Riganti.Utils.Infrastructure.Core;
@@ -24,6 +25,10 @@ namespace Altairis.NemesisEvents.Web.ViewModels
 	    public bool IsLoggedIn => Context.HttpContext.User.Identity.IsAuthenticated;
 
 	    public string LoggedUserName => Context.HttpContext.User.Identity.Name;
+
+	    public bool IsOrganizer => Context.HttpContext.User.IsInRole(Role.Organizers);
+
+        public bool IsAdministrator => Context.HttpContext.User.IsInRole(Role.Administrators);
 
         public string CurrentRoute => Context.Route.RouteName;
 

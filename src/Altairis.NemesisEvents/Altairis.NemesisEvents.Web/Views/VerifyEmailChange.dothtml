@@ -1,0 +1,11 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.VerifyEmailChangeViewModel, Altairis.NemesisEvents.Web
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <h2>Změna e-mailové adresy</h2>
+
+    <cc:Alerts />
+
+</dot:Content>
+

@@ -50,5 +50,11 @@ namespace Altairis.NemesisEvents.Web
             return new WebRoute(domain, configuration.RouteTable["VerifyEmail"].BuildUrl(new { })
                 + "?email=" + WebUtility.UrlEncode(email) + "&token=" + WebUtility.UrlEncode(token));
         }
+
+        public WebRoute VerifyEmailChange(string email, string token)
+        {
+            return new WebRoute(domain, configuration.RouteTable["VerifyEmailChange"].BuildUrl(new { })
+                + "?email=" + WebUtility.UrlEncode(email) + "&token=" + WebUtility.UrlEncode(token));
+        }
     }
 }

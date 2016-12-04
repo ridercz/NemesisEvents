@@ -35,9 +35,15 @@
                         {{value: LoggedUserName}} <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Můj profil</a></li>
-                        <li><a href="#">Moje akce</a></li>
-                        <li><a href="#">Administrace</a></li>
+                        <li>
+                            <a href="#">Můj profil</a>
+                        </li>
+                        <li Visible="{value: IsOrganizer}">
+                            <a href="#">Moje akce</a>
+                        </li>
+                        <li Visible="{value: IsAdministrator}">
+                            <a href="#">Administrace</a>
+                        </li>
                         <li role="separator" class="divider"></li>
                         <li>
                             <dot:LinkButton Text="Odhlásit se" Click="{command: Logout()}" Validation.Enabled="false" />
