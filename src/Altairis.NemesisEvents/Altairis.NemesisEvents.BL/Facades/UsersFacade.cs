@@ -46,7 +46,7 @@ namespace Altairis.NemesisEvents.BL.Facades {
             await mgr.UpdateAsync(usr);
 
             // Update roles
-            await mgr.RemoveFromRolesAsync(usr, new string[] { Role.Administrators, Role.Organizers });
+            await mgr.RemoveFromRolesAsync(usr, Role.AllRoles);
             if (item.IsAdministrator) await mgr.AddToRoleAsync(usr, Role.Administrators);
             if (item.IsOrganizer) await mgr.AddToRoleAsync(usr, Role.Organizers);
         }
