@@ -12,14 +12,24 @@ using DotVVM.Framework.ViewModel;
 namespace Altairis.NemesisEvents.Web.ViewModels {
     public class DefaultViewModel : MasterPageViewModel {
 
+        private readonly PublicEventsFacade facade;
+
         public IList<PublicUpcomingEventDTO> UpcomingEvents { get; set; }
 
         public IList<PublicArchiveEventDTO> RecentEvents { get; set; }
 
-        public DefaultViewModel(PublicEventsFacade f) {
-            this.UpcomingEvents = f.ListUpcomingEvents();
-            this.RecentEvents = f.ListRecentArchiveEvents();
+
+        public DefaultViewModel(PublicEventsFacade facade)
+        {
+            this.facade = facade;
         }
 
+
+        public override Task PreRender()
+        {
+            this.UpcomingEvents = facade.ListUpcomingEvents();
+            this.RecentEvents = facade.ListRecentArchiveEvents();
+            return base.PreRender();
+        }
     }
 }
