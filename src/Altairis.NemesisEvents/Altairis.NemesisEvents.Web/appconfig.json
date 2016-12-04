@@ -3,7 +3,7 @@
   "AmazonSecretAccessKey": "",
   "ApplicationName": "Nemesis Events",
   "BaseUrl": "http://localhost:5194/",
-  "MailPickupDirectory": "c:\\temp\\mailpickup",
+  "MailPickupDirectory": "C:\\InetPub\\MailRoot\\pickup",
   "SqlConnectionString": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents",
   "TitleFormatString": "Nemesis Events {0}"
 }
