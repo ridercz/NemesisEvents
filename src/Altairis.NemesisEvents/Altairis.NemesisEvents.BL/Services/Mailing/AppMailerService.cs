@@ -19,22 +19,22 @@ namespace Altairis.NemesisEvents.BL.Services.Mailing
             SubjectFormatString = "[GeekCore] {0}";
         }
 
-        public void SendPasswordResetEmail(ForgottenPasswordDTO data, string token)
+        public async Task SendPasswordResetEmailAsync(ForgottenPasswordDTO data, string token)
         {
             var url = routeBuilder.ResetPassword(data.Email, token).AbsoluteUri;
-            SendMail(data.Email, "Reset hesla", url);
+            await SendMailAsync(data.Email, "Reset hesla", url);
         }
 
-        public void SendEmailAddressConfirmationEmail(RegisterDTO data, string token)
+        public async Task SendEmailAddressConfirmationEmailAsync(RegisterDTO data, string token)
         {
             var url = routeBuilder.VerifyEmail(data.Email, token).AbsoluteUri;
-            SendMail(data.Email, "Ověření e-mailové adresy", url);
+            await SendMailAsync(data.Email, "Ověření e-mailové adresy", url);
         }
 
-        public void SendEmailChangeConfirmationEmail(string newEmail, string token)
+        public async Task SendEmailChangeConfirmationEmailAsync(string newEmail, string token)
         {
             var url = routeBuilder.VerifyEmailChange(newEmail, token).AbsoluteUri;
-            SendMail(newEmail, "Změna e-mailové adresy", url);
+            await SendMailAsync(newEmail, "Změna e-mailové adresy", url);
         }
     }
 }

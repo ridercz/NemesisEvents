@@ -22,7 +22,11 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper {
                 .AssignableTo<IDotvvmPresenter>()
                 .InstancePerDependency();
 
-            builder.Register(c => new WebRouteBuilder("http://localhost:5194/", c.Resolve<DotvvmConfiguration>()))
+            builder.Register(c =>
+                {
+                    var options = c.Resolve<IOptions<AppConfig>>().Value;
+                    return new WebRouteBuilder(options.BaseUrl, c.Resolve<DotvvmConfiguration>());
+                })
                 .As<IWebRouteBuilder>()
                 .SingleInstance();
 

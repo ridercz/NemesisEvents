@@ -1,5 +1,8 @@
 {
   "ApplicationName": "Nemesis Events",
   "BaseUrl": "http://localhost:5194/",
-  "TitleFormatString": "Nemesis Events {0}"
+  "TitleFormatString": "Nemesis Events {0}",
+  "MailPickupDirectory": "c:\\temp\\mailpickup",
+  "AmazonAccessKeyId": "",
+  "AmazonSecretAccessKey": ""
 }

@@ -9,10 +9,10 @@
     "Altairis.NemesisEvents.DAL": {
       "target": "project"
     },
-    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-04",
-    "Riganti.Utils.Infrastructure.Services": "2.0.0-alpha-04",
-    "Riganti.Utils.Infrastructure.DotVVM": "2.0.0-alpha-04",
-    "Riganti.Utils.Infrastructure.AutoMapper": "2.0.0-alpha-04",
+    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-06",
+    "Riganti.Utils.Infrastructure.Services": "2.0.0-alpha-06",
+    "Riganti.Utils.Infrastructure.DotVVM": "2.0.0-alpha-06",
+    "Riganti.Utils.Infrastructure.AutoMapper": "2.0.0-alpha-06",
     "AutoMapper": "5.2.0",
     "DotVVM.Core": "1.1.0-alpha-r4"
   },

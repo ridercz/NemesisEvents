@@ -12,5 +12,10 @@ namespace Altairis.NemesisEvents.Web {
 
         public string TitleFormatString { get; set; }
 
+        public string AmazonAccessKeyId { get; set; }
+
+        public string AmazonSecretAccessKey { get; set; }
+
+        public string MailPickupDirectory { get; set; }
     }
 }

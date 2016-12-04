@@ -77,7 +77,7 @@ namespace Altairis.NemesisEvents.BL.Facades
                     }
 
                     var token = await manager.GeneratePasswordResetTokenAsync(user);
-                    MailerService.SendPasswordResetEmail(data, token);
+                    await MailerService.SendPasswordResetEmailAsync(data, token);
                 }
             }
         }
@@ -148,7 +148,7 @@ namespace Altairis.NemesisEvents.BL.Facades
                     var token = await manager.GenerateEmailConfirmationTokenAsync(user);
                     await uow.CommitAsync();
 
-                    MailerService.SendEmailAddressConfirmationEmail(data, token);
+                    await MailerService.SendEmailAddressConfirmationEmailAsync(data, token);
                 }
             }
         }
@@ -193,7 +193,7 @@ namespace Altairis.NemesisEvents.BL.Facades
                     var user = await manager.FindByIdAsync(CurrentUser.Id.ToString());
 
                     var token = await manager.GenerateChangeEmailTokenAsync(user, newEmail);
-                    MailerService.SendEmailChangeConfirmationEmail(newEmail, token);
+                    await MailerService.SendEmailChangeConfirmationEmailAsync(newEmail, token);
                 }
             }
         }

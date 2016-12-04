@@ -23,10 +23,13 @@ using Microsoft.Extensions.Options;
 
 namespace Altairis.NemesisEvents.Web {
     public class Startup {
+        private readonly IHostingEnvironment env;
+
         public IContainer ApplicationContainer { get; private set; }
         public IConfigurationRoot Configuration { get; private set; }
 
         public Startup(IHostingEnvironment env) {
+            this.env = env;
             // Load configuration from JSON file
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(env.ContentRootPath);
@@ -60,7 +63,7 @@ namespace Altairis.NemesisEvents.Web {
             var builder = new ContainerBuilder();
             DataAccessInstaller.Install(builder);
             AutoMapperInstaller.Install(builder);
-            ServicesInstaller.Install(builder);
+            ServicesInstaller.Install(builder, env);
             WebInstaller.Install(builder);
             builder.Populate(services);
             ApplicationContainer = builder.Build();
