@@ -9,6 +9,8 @@ using AutoMapper;
 
 namespace Altairis.NemesisEvents.BL.Facades {
     public class UsersFacade : AppFacadeBase {
+        private const string ROLE_ADM = "Administrators";
+        private const string ROLE_ORG = "Organizers";
 
         public Func<AppUserManager> AppUserManagerFactory { get; set; }
 
@@ -28,20 +30,28 @@ namespace Altairis.NemesisEvents.BL.Facades {
             var usr = await mgr.FindByIdAsync(userId.ToString());
             return new UserDetailDTO {
                 Id = usr.Id,
-                CompanyName = usr.CompanyName,
                 Email = usr.Email,
-                Enabled = usr.Enabled,
+                CompanyName = usr.CompanyName,
                 FullName = usr.FullName,
-                IsAdministrator = await mgr.IsInRoleAsync(usr, "Administrators"),
-                IsOrganizer = await mgr.IsInRoleAsync(usr, "Organizers")
+                Enabled = usr.Enabled,
+                IsAdministrator = await mgr.IsInRoleAsync(usr, ROLE_ADM),
+                IsOrganizer = await mgr.IsInRoleAsync(usr, ROLE_ORG)
             };
         }
 
-        public void Save(UserDTO item) {
-            throw new NotImplementedException();
+        public async Task Save(UserDetailDTO item) {
+            var mgr = this.AppUserManagerFactory();
+            var usr = await mgr.FindByIdAsync(item.Id.ToString());
+
+            // Enable or disable user
+            usr.Enabled = item.Enabled;
+            await mgr.UpdateAsync(usr);
+
+            // Update roles
+            await mgr.RemoveFromRolesAsync(usr, new string[] { ROLE_ADM, ROLE_ORG });
+            if (item.IsAdministrator) await mgr.AddToRoleAsync(usr, ROLE_ADM);
+            if (item.IsOrganizer) await mgr.AddToRoleAsync(usr, ROLE_ORG);
         }
-
-
 
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DotVVM.Framework.ViewModel;
 using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.BL.DTO {
@@ -9,10 +6,13 @@ namespace Altairis.NemesisEvents.BL.DTO {
 
         public int Id { get; set; }
 
+        [Bind(Direction.ServerToClient)]
         public string Email { get; set; }
 
+        [Bind(Direction.ServerToClient)]
         public string FullName { get; set; }
 
+        [Bind(Direction.ServerToClient)]
         public string CompanyName { get; set; }
 
         public bool Enabled { get; set; }
