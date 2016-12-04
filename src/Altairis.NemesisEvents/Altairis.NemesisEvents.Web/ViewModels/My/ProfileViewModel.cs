@@ -10,9 +10,9 @@ using DotVVM.Framework.ViewModel;
 namespace Altairis.NemesisEvents.Web.ViewModels.My {
     public class ProfileViewModel : Altairis.NemesisEvents.Web.ViewModels.MasterPageViewModel {
 
-        private PublicProfileFacade profileFacade;
-        private AreasFacade areasFacade;
-        private TagsFacade tagsFacade;
+        private readonly PublicProfileFacade profileFacade;
+        private readonly AreasFacade areasFacade;
+        private readonly TagsFacade tagsFacade;
 
         public PublicProfileDTO Item { get; set; }
 
@@ -32,9 +32,8 @@ namespace Altairis.NemesisEvents.Web.ViewModels.My {
 
         public async Task Save() {
             await ExecuteSafeAsync(async () => await profileFacade.SaveMyProfileAsync(this.Item));
-            this.Context.RedirectToRoute("MyEvents");
+            this.Context.RedirectToRoute("MyDefault");
         }
-
 
     }
 }
