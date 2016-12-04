@@ -48,9 +48,6 @@ namespace Altairis.NemesisEvents.BL.DTO {
         public DateTime DateCreated { get; set; }
 
         [Required]
-        public bool InvitationSent { get; set; }
-
-        [Required]
         public int OwnerId { get; set; }
 
         public IList<int> TagIds { get; } = new List<int>();
