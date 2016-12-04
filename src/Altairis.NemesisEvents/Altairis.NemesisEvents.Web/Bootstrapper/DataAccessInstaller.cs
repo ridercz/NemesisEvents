@@ -43,6 +43,10 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
                 .As(typeof(IRepository<,>))
                 .SingleInstance();
 
+            builder.RegisterType<UtcDateTimeNowProvider>()
+                .As<IDateTimeNowProvider>()
+                .SingleInstance();
+
             builder.RegisterAssemblyTypes(typeof(AppRepositoryBase<,>).GetTypeInfo().Assembly)
                 .AsClosedTypesOf(typeof(AppRepositoryBase<,>))
                 .SingleInstance();
