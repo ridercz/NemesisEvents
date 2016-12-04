@@ -27,7 +27,7 @@ namespace Altairis.NemesisEvents.Web
             config.RouteTable.Add("Register", "registrace", "Views/Register.dothtml");
             config.RouteTable.Add("VerifyEmail", "overeni-emailu", "Views/VerifyEmail.dothtml");
 
-            config.RouteTable.Add("EventDetail", "akce/{Id}/{Name}", "Views/EventDetail.dothtml");
+            config.RouteTable.Add("EventDetail", "akce/{Id}", "Views/EventDetail.dothtml");
             config.RouteTable.Add("Archive", "archiv", "Views/Archive.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
