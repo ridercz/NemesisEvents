@@ -1,0 +1,53 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.RegisterViewModel, Altairis.NemesisEvents.Web
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <h2>Registrace</h2>
+
+    <cc:Alerts />
+
+    <div class="form form-narrow" DataContext="{value: Data}">
+        <div class="form-group">
+            <label class="control-label">E-mailová adresa</label>
+            <div Validator.Value="{value: Email}">
+                <dot:TextBox Text="{value: Email}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Heslo</label>
+            <div Validator.Value="{value: Password}">
+                <dot:TextBox Text="{value: Password}" Type="Password" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Potvrzení hesla</label>
+            <div Validator.Value="{value: PasswordConfirmation}">
+                <dot:TextBox Text="{value: PasswordConfirmation}" Type="Password" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Jméno nebo přezdívka</label>
+            <div Validator.Value="{value: FullName}">
+                <dot:TextBox Text="{value: FullName}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Společnost</label>
+            <div Validator.Value="{value: CompanyName}">
+                <dot:TextBox Text="{value: CompanyName}" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <dot:Button Text="Zaregistrovat se" Click="{command: Register()}" class="btn btn-primary" />
+    </div>
+
+
+</dot:Content>
+

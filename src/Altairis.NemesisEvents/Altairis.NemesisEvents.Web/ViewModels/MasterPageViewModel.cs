@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Altairis.NemesisEvents.BL.Services;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using Riganti.Utils.Infrastructure.Core;
@@ -26,6 +27,12 @@ namespace Altairis.NemesisEvents.Web.ViewModels
 
         public string CurrentRoute => Context.Route.RouteName;
 
+
+	    public async Task Logout()
+	    {
+	        await Context.GetAuthentication().SignOutAsync(AppUserManager.AuthenticationScheme);
+            Context.RedirectToRoute("Default");
+	    }
 
         protected bool ExecuteSafe(Action action)
 	    {

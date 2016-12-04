@@ -33,17 +33,13 @@ namespace Altairis.NemesisEvents.Web
             services.AddDotVVM()
                 .ConfigureTempStorages("temp");
 
-            services.AddAuthentication(options =>
-                {
-                    options.SignInScheme = AppUserManager.AuthenticationScheme;
-                });
             services.AddIdentity<User, Role>(options =>
-                {
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequiredLength = 8;
-                    options.User.RequireUniqueEmail = true;
-                })
-                .AddDefaultTokenProviders();
+            {
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 8;
+                options.User.RequireUniqueEmail = true;
+            })
+            .AddDefaultTokenProviders();
 
             // configure container
             var builder = new ContainerBuilder();
@@ -61,6 +57,16 @@ namespace Altairis.NemesisEvents.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
         {
+            // cookie authentication
+            app.UseCookieAuthentication(new CookieAuthenticationOptions()
+            {
+                AuthenticationScheme = AppUserManager.AuthenticationScheme,
+                LoginPath = new PathString("/prihlaseni"),
+                AccessDeniedPath = new PathString("/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true
+            });
+
             // use DotVVM
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(env.ContentRootPath);
 
