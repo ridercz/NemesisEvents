@@ -5,8 +5,20 @@ namespace Altairis.NemesisEvents.DAL {
 
     public class NemesisEventsContext : IdentityDbContext<User, Role, int> {
 
+        private string connectionString;
+
+        public NemesisEventsContext()
+        {
+            connectionString = @"SERVER=.\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents";
+        }
+
+        public NemesisEventsContext(string connectionString)
+        {
+            this.connectionString = connectionString;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) {
-            optionsBuilder.UseSqlServer(@"SERVER=.\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents");
+            optionsBuilder.UseSqlServer(connectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder builder) {

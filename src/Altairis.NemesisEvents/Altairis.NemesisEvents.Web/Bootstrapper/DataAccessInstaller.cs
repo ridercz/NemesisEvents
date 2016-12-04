@@ -14,6 +14,7 @@ using Autofac.Core;
 using Autofac.Core.Registration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.EntityFrameworkCore;
 using Riganti.Utils.Infrastructure.AutoMapper;
@@ -27,8 +28,13 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
         {
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
 
-            builder.RegisterType<NemesisEventsContext>()
+            builder.Register(c =>
+                {
+                    var options = c.Resolve<IOptions<AppConfig>>().Value;
+                    return new NemesisEventsContext(options.SqlConnectionString);
+                })
                 .As<DbContext>()
+                .As<NemesisEventsContext>()
                 .InstancePerDependency();
 
             builder.Register(c => new AspNetCoreUnitOfWorkRegistry(c.Resolve<IHttpContextAccessor>(), new AsyncLocalUnitOfWorkRegistry()))

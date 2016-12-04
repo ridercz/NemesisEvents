@@ -4,5 +4,6 @@
   "TitleFormatString": "Nemesis Events {0}",
   "MailPickupDirectory": "c:\\temp\\mailpickup",
   "AmazonAccessKeyId": "",
-  "AmazonSecretAccessKey": ""
+  "AmazonSecretAccessKey": "",
+  "SqlConnectionString": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents"
 }

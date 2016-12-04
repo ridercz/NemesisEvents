@@ -33,7 +33,7 @@
         </div>
     </dot:Repeater>
 
-    <dot:DataPager DataSet="{value: ArchiveEvents}" class="pagination" />
+    <dot:DataPager DataSet="{value: ArchiveEvents}" class="pagination"/>
 
 </dot:Content>
 
