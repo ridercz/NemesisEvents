@@ -36,7 +36,10 @@ namespace Altairis.NemesisEvents.BL.Facades {
             return d;
         }
 
-        public IList<OrganizedEventDTO> ListEventsOrganizedBy(int userId) {
+        public IList<OrganizedEventDTO> ListEventsOrganizedBy(int userId = 0) {
+            // Default to current user
+            if (userId == 0) userId = this.CurrentUser.Id;
+
             using (var uow = this.UnitOfWorkProvider.Create()) {
                 var q = this.OrganizedEventsQueryFactory();
                 q.UserId = userId;

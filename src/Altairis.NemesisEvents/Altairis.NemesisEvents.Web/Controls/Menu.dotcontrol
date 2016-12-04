@@ -36,10 +36,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <dot:RouteLink RouteName="MyProfile" Text="Nastavení" />
+                            <dot:RouteLink RouteName="MyDefault" Text="Moje akce" />
                         </li>
-                        <li Visible="{value: IsOrganizer}">
-                            <a href="#">Akce které pořádám</a>
+                        <li>
+                            <dot:RouteLink RouteName="MyProfile" Text="Nastavení" />
                         </li>
                         <li Visible="{value: IsAdministrator}">
                             <a href="#">Administrace</a>
