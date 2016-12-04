@@ -6,6 +6,7 @@ namespace Altairis.NemesisEvents.DAL {
 
         public const string Administrators = "Administrators";
         public const string Organizers = "Organizers";
+        public static readonly string[] AllRoles = { Administrators, Organizers };
 
     }
 }
