@@ -10,7 +10,9 @@ namespace Altairis.NemesisEvents.Web {
 
         public string ApplicationName { get; set; }
 
-        public string TitleFormatString { get; set; }
+        public string PageTitleDefault { get; set; }
+
+        public string PageTitleFormat { get; set; }
 
         public string AmazonAccessKeyId { get; set; }
 

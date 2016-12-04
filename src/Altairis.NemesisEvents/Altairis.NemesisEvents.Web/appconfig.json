@@ -4,6 +4,7 @@
   "ApplicationName": "Nemesis Events",
   "BaseUrl": "http://localhost:5194/",
   "MailPickupDirectory": "C:\\InetPub\\MailRoot\\pickup",
-  "SqlConnectionString": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents",
-  "TitleFormatString": "Nemesis Events {0}"
+  "PageTitleDefault": "Nemesis Events",
+  "PageTitleFormat": "{0} | Nemesis Events",
+  "SqlConnectionString": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents"
 }
