@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Altairis.NemesisEvents.BL.DTO;
 using Altairis.NemesisEvents.BL.Facades;
-using DotVVM.Framework.ViewModel;
 
-namespace Altairis.NemesisEvents.Web.ViewModels
+namespace Altairis.NemesisEvents.Web.ViewModels.Account
 {
 	public class RegisterViewModel : MasterPageViewModel
 	{

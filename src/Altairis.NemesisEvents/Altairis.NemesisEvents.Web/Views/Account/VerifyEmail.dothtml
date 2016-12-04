@@ -1,4 +1,4 @@
-﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.VerifyEmailViewModel, Altairis.NemesisEvents.Web
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.Account.VerifyEmailViewModel, Altairis.NemesisEvents.Web
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">

@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 using Altairis.NemesisEvents.BL.Facades;
 using Altairis.NemesisEvents.BL.Services;
 using DotVVM.Framework.Hosting;
-using DotVVM.Framework.ViewModel;
 
-namespace Altairis.NemesisEvents.Web.ViewModels
+namespace Altairis.NemesisEvents.Web.ViewModels.Account
 {
 	public class VerifyEmailViewModel : MasterPageViewModel
 	{

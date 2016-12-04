@@ -21,11 +21,11 @@ namespace Altairis.NemesisEvents.Web
         {
             config.RouteTable.Add("Default", "", "Views/Default.dothtml");
 
-            config.RouteTable.Add("Login", "prihlaseni", "Views/Login.dothtml");
-            config.RouteTable.Add("ForgottenPassword", "zapomenute-heslo", "Views/ForgottenPassword.dothtml");
-            config.RouteTable.Add("ResetPassword", "reset-hesla", "Views/ResetPassword.dothtml");
-            config.RouteTable.Add("Register", "registrace", "Views/Register.dothtml");
-            config.RouteTable.Add("VerifyEmail", "overeni-emailu", "Views/VerifyEmail.dothtml");
+            config.RouteTable.Add("Login", "prihlaseni", "Views/Account/Login.dothtml");
+            config.RouteTable.Add("ForgottenPassword", "zapomenute-heslo", "Views/Account/ForgottenPassword.dothtml");
+            config.RouteTable.Add("ResetPassword", "reset-hesla", "Views/Account/ResetPassword.dothtml");
+            config.RouteTable.Add("Register", "registrace", "Views/Account/Register.dothtml");
+            config.RouteTable.Add("VerifyEmail", "overeni-emailu", "Views/Account/VerifyEmail.dothtml");
 
             config.RouteTable.Add("EventDetail", "akce/{Id}", "Views/EventDetail.dothtml");
             config.RouteTable.Add("Archive", "archiv", "Views/Archive.dothtml");

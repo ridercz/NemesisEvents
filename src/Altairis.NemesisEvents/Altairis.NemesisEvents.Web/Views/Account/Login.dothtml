@@ -1,4 +1,4 @@
-﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.LoginViewModel, Altairis.NemesisEvents.Web
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.Account.LoginViewModel, Altairis.NemesisEvents.Web
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
