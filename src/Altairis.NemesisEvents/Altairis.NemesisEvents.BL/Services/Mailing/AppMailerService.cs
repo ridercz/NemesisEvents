@@ -30,5 +30,11 @@ namespace Altairis.NemesisEvents.BL.Services.Mailing
             var url = routeBuilder.VerifyEmail(data.Email, token).AbsoluteUri;
             SendMail(data.Email, "Ověření e-mailové adresy", url);
         }
+
+        public void SendEmailChangeConfirmationEmail(string newEmail, string token)
+        {
+            var url = routeBuilder.VerifyEmailChange(newEmail, token).AbsoluteUri;
+            SendMail(newEmail, "Změna e-mailové adresy", url);
+        }
     }
 }

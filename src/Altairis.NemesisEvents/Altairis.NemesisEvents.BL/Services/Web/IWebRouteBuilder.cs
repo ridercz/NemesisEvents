@@ -21,5 +21,7 @@ namespace Altairis.NemesisEvents.BL.Services.Web
 
         WebRoute VerifyEmail(string email, string token);
 
+        WebRoute VerifyEmailChange(string email, string token);
+
     }
 }

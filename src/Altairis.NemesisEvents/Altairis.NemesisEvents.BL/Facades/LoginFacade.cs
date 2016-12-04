@@ -10,6 +10,7 @@ using Altairis.NemesisEvents.DAL;
 using Microsoft.AspNetCore.Http.Authentication.Internal;
 using Microsoft.AspNetCore.Identity;
 using Riganti.Utils.Infrastructure.Core;
+using Riganti.Utils.Infrastructure.Services;
 
 namespace Altairis.NemesisEvents.BL.Facades
 {
@@ -20,6 +21,7 @@ namespace Altairis.NemesisEvents.BL.Facades
 
         public AppMailerService MailerService { get; set; }
 
+        public ICurrentUserProvider<int> CurrentUser { get; set; }
 
 
         public async Task<ClaimsIdentity> Login(LoginDTO data)
@@ -40,18 +42,25 @@ namespace Altairis.NemesisEvents.BL.Facades
                         throw new UIException("Nesprávné uživatelské jméno nebo heslo!");
                     }
 
-                    return CreateIdentity(user);
+                    var roles = await manager.GetRolesAsync(user);
+                    return CreateIdentity(user, roles);
                 }
             }
         }
 
-        private ClaimsIdentity CreateIdentity(User user)
+        private ClaimsIdentity CreateIdentity(User user, IEnumerable<string> roles)
         {
-            var identity = new ClaimsIdentity(new[]
+            var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            }, AppUserManager.AuthenticationScheme);
+                new Claim(ClaimTypes.Name, user.FullName),
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
+            };
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            var identity = new ClaimsIdentity(claims, AppUserManager.AuthenticationScheme);
             return identity;
         }
 
@@ -165,10 +174,48 @@ namespace Altairis.NemesisEvents.BL.Facades
                         }
 
                         await uow.CommitAsync();
-                        return CreateIdentity(user);
+
+                        var roles = await manager.GetRolesAsync(user);
+                        return CreateIdentity(user, roles);
                     }
 
                     return null;
+                }
+            }
+        }
+
+        public async Task RequestEmailChange(string newEmail)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                using (var manager = AppUserManagerFactory())
+                {
+                    var user = await manager.FindByIdAsync(CurrentUser.Id.ToString());
+
+                    var token = await manager.GenerateChangeEmailTokenAsync(user, newEmail);
+                    MailerService.SendEmailChangeConfirmationEmail(newEmail, token);
+                }
+            }
+        }
+
+        public async Task ChangeEmail(string newEmail, string token)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                using (var manager = AppUserManagerFactory())
+                {
+                    var user = await manager.FindByIdAsync(CurrentUser.Id.ToString());
+                   
+                    var result = await manager.ChangeEmailAsync(user, newEmail, token);
+                    if (!result.Succeeded)
+                    {
+                        throw new UIException("Odkaz pro ověření e-mailové adresy není platný nebo již vypršel.");
+                    }
+
+                    user.UserName = newEmail;
+                    user.NormalizedUserName = newEmail.ToUpper();
+
+                    await uow.CommitAsync();
                 }
             }
         }
