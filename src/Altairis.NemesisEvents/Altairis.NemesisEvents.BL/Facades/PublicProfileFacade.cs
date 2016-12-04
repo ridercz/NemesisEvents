@@ -16,18 +16,20 @@ namespace Altairis.NemesisEvents.BL.Facades {
         public ICurrentUserProvider<int> CurrentUser { get; set; }
 
         public async Task<PublicProfileDTO> GetMyProfileAsync() {
-            var mgr = this.AppUserManagerFactory();
-            var usr = await mgr.FindByIdAsync(this.CurrentUser.Id.ToString());
-            return Mapper.Map<PublicProfileDTO>(usr);
+            using (var uow = this.UnitOfWorkProvider.Create()) {
+                var mgr = this.AppUserManagerFactory();
+                var usr = await mgr.FindByIdAsync(this.CurrentUser.Id.ToString());
+                return Mapper.Map<PublicProfileDTO>(usr);
+            }
         }
 
         public async Task SaveMyProfileAsync(PublicProfileDTO item) {
-            var mgr = this.AppUserManagerFactory();
-            var usr = await mgr.FindByIdAsync(this.CurrentUser.Id.ToString());
-
-            Mapper.Map(item, usr);
-            await mgr.UpdateAsync(usr);
-        }
+            using (var uow = this.UnitOfWorkProvider.Create()) {
+                var mgr = this.AppUserManagerFactory();
+                var usr = await mgr.FindByIdAsync(this.CurrentUser.Id.ToString());
+                Mapper.Map(item, usr);
+                await mgr.UpdateAsync(usr);
+            }        }
 
     }
 }
