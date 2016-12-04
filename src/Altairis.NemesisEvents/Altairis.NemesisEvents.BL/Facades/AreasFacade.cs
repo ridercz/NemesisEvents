@@ -12,7 +12,7 @@ using Riganti.Utils.Infrastructure.Services.Facades;
 namespace Altairis.NemesisEvents.BL.Facades {
     public class AreasFacade : AppCrudFacadeBase<Area, int, AreaDTO, AreaDTO> {
 
-        public AreasFacade(Func<IQuery<AreaDTO>> queryFactory, IRepository<Area, int> repository, IEntityDTOMapper<Area, AreaDTO> mapper)
+        public AreasFacade(Func<AreasQuery> queryFactory, IRepository<Area, int> repository, IEntityDTOMapper<Area, AreaDTO> mapper)
             : base(queryFactory, repository, mapper) { }
 
 
