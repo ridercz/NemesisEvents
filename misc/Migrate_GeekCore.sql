@@ -99,6 +99,8 @@ INSERT
 	FROM Events AS E
 	LEFT JOIN NemesisEvents.dbo.AspNetUsers AS U ON E.OwnerUserName = U.UserName
 SET IDENTITY_INSERT NemesisEvents.dbo.Events OFF
+PRINT 'Normalizing free event prices...'
+UPDATE NemesisEvents.dbo.Events SET AdmissionFee = NULL WHERE AdmissionFee = '0 Kè'
 
 -- Migrate Attendees
 PRINT 'Migrating attendees...'
