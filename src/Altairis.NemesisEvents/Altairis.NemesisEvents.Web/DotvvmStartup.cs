@@ -26,6 +26,8 @@ namespace Altairis.NemesisEvents.Web {
             config.RouteTable.Add("EventDetail", "events/{Id}", "Views/EventDetail.dothtml");
             config.RouteTable.Add("Archive", "events", "Views/Archive.dothtml");
 
+            config.RouteTable.Add("MyEvents", "my", "Views/My/Events.dothtml");
+            config.RouteTable.Add("MyProfile", "my/profile", "Views/My/Profile.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));

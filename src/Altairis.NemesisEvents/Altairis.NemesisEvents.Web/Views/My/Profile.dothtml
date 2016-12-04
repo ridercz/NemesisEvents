@@ -1,0 +1,55 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.My.ProfileViewModel, Altairis.NemesisEvents.Web
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <h2>Můj profil</h2>
+
+    <cc:Alerts />
+
+    <div class="form form-narrow" DataContext="{value: Item}">
+        <div class="form-group">
+            <label class="control-label">Jméno</label>
+            <div Validator.Value="{value: FullName}">
+                <dot:TextBox Text="{value: FullName}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Firma</label>
+            <div Validator.Value="{value: CompanyName}">
+                <dot:TextBox Text="{value: CompanyName}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Zasílat pozvánky na akce</label>
+            <div>
+                <dot:RadioButton CheckedItem="{value: EmailFrequency}" CheckedValue="Separate" Text="jednotlivě" /><br />
+                <dot:RadioButton CheckedItem="{value: EmailFrequency}" CheckedValue="Daily" Text="jednou denně" /><br />
+                <dot:RadioButton CheckedItem="{value: EmailFrequency}" CheckedValue="Weekly" Text="jednou týdně" /><br />
+                <dot:RadioButton CheckedItem="{value: EmailFrequency}" CheckedValue="None" Text="nezasílat" /><br />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Oblasti</label>
+            <dot:Repeater DataSource="{value: _parent.Areas}">
+                <dot:CheckBox CheckedItems="{value: _parent.WatchedAreaIds}" CheckedValue="{value: Id}" Text="{value: Name}" /><br />
+            </dot:Repeater>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Tagy</label>
+            <dot:Repeater DataSource="{value: _parent.Tags}">
+                <dot:CheckBox CheckedItems="{value: _parent.WatchedTagIds}" CheckedValue="{value: Id}" Text="{value: Name}" />
+                <br />
+            </dot:Repeater>
+        </div>
+    </div>
+
+    <div>
+        <dot:Button Text="Uložit" Click="{command: Save()}" class="btn btn-primary" />
+    </div>
+
+</dot:Content>
+
