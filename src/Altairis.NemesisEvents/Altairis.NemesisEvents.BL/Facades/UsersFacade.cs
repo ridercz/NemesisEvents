@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 using Altairis.NemesisEvents.BL.DTO;
 using Altairis.NemesisEvents.BL.Queries;
 using Altairis.NemesisEvents.BL.Services;
+using Altairis.NemesisEvents.DAL;
 using AutoMapper;
 
 namespace Altairis.NemesisEvents.BL.Facades {
     public class UsersFacade : AppFacadeBase {
-        private const string ROLE_ADM = "Administrators";
-        private const string ROLE_ORG = "Organizers";
-
         public Func<AppUserManager> AppUserManagerFactory { get; set; }
 
         public Func<UsersQuery> UsersQueryFactory { get; set; }
@@ -34,8 +32,8 @@ namespace Altairis.NemesisEvents.BL.Facades {
                 CompanyName = usr.CompanyName,
                 FullName = usr.FullName,
                 Enabled = usr.Enabled,
-                IsAdministrator = await mgr.IsInRoleAsync(usr, ROLE_ADM),
-                IsOrganizer = await mgr.IsInRoleAsync(usr, ROLE_ORG)
+                IsAdministrator = await mgr.IsInRoleAsync(usr, Role.Administrators),
+                IsOrganizer = await mgr.IsInRoleAsync(usr, Role.Organizers)
             };
         }
 
@@ -48,9 +46,9 @@ namespace Altairis.NemesisEvents.BL.Facades {
             await mgr.UpdateAsync(usr);
 
             // Update roles
-            await mgr.RemoveFromRolesAsync(usr, new string[] { ROLE_ADM, ROLE_ORG });
-            if (item.IsAdministrator) await mgr.AddToRoleAsync(usr, ROLE_ADM);
-            if (item.IsOrganizer) await mgr.AddToRoleAsync(usr, ROLE_ORG);
+            await mgr.RemoveFromRolesAsync(usr, new string[] { Role.Administrators, Role.Organizers });
+            if (item.IsAdministrator) await mgr.AddToRoleAsync(usr, Role.Administrators);
+            if (item.IsOrganizer) await mgr.AddToRoleAsync(usr, Role.Organizers);
         }
 
     }
