@@ -4,6 +4,7 @@ using Autofac;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
+using Riganti.Utils.Infrastructure.Core;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
@@ -21,6 +22,10 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
 
             builder.Register(c => new WebRouteBuilder("http://localhost:5194/", c.Resolve<DotvvmConfiguration>()))
                 .As<IWebRouteBuilder>()
+                .SingleInstance();
+
+            builder.RegisterType<CurrentUserProvider>()
+                .As<IUnitOfWorkProvider>()
                 .SingleInstance();
         }
     }
