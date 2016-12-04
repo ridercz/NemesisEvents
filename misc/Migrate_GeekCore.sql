@@ -41,7 +41,7 @@ INSERT
 		Email = U.Email,
 		EmailConfirmed = 1,
 		LockoutEnabled = 0,
-		NormalizedEmail = U.Email,
+		NormalizedEmail = UPPER(U.Email),
 		NormalizedUserName = U.UserName,
 		PhoneNumberConfirmed = 0,
 		TwoFactorEnabled = 0,
@@ -64,13 +64,13 @@ PRINT 'Creating roles if needed...'
 DECLARE @AdmRoleId int
 SELECT @AdmRoleId = Id FROM NemesisEvents.dbo.AspNetRoles WHERE Name = 'Administrators'
 IF (@AdmRoleId IS NULL) BEGIN
-	INSERT INTO NemesisEvents.dbo.AspNetRoles VALUES (NEWID(), 'Administrators', 'administrators')
+	INSERT INTO NemesisEvents.dbo.AspNetRoles VALUES (NEWID(), 'Administrators', 'ADMINISTRATORS')
 	SELECT @AdmRoleId = SCOPE_IDENTITY()
 END
 DECLARE @OrgRoleId int
 SELECT @OrgRoleId = Id FROM NemesisEvents.dbo.AspNetRoles WHERE Name = 'Organizers'
 IF (@OrgRoleId IS NULL) BEGIN
-	INSERT INTO NemesisEvents.dbo.AspNetRoles VALUES (NEWID(), 'Organizers', 'organizers')
+	INSERT INTO NemesisEvents.dbo.AspNetRoles VALUES (NEWID(), 'Organizers', 'ORGANIZERS')
 	SELECT @OrgRoleId = SCOPE_IDENTITY()
 END
 PRINT 'Updating user roles...'
@@ -152,7 +152,7 @@ PRINT 'Deleting duplicate users...'
 DELETE FROM NemesisEvents.dbo.AspNetUsers WHERE Id IN (120, 3663, 3149, 3604, 3526, 4065, 4659, 4408)
 
 PRINT 'Changing user names to email addresses...'
-UPDATE NemesisEvents.dbo.AspNetUsers SET UserName = Email, NormalizedUserName = Email
+UPDATE NemesisEvents.dbo.AspNetUsers SET UserName = Email, NormalizedUserName = UPPER(Email)
 
 -- Add tags
 PRINT 'Creating tags...'
