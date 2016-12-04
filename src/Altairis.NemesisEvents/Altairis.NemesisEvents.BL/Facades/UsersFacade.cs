@@ -24,31 +24,37 @@ namespace Altairis.NemesisEvents.BL.Facades {
         }
 
         public async Task<UserDetailDTO> GetDetail(int userId) {
-            var mgr = this.AppUserManagerFactory();
-            var usr = await mgr.FindByIdAsync(userId.ToString());
-            return new UserDetailDTO {
-                Id = usr.Id,
-                Email = usr.Email,
-                CompanyName = usr.CompanyName,
-                FullName = usr.FullName,
-                Enabled = usr.Enabled,
-                IsAdministrator = await mgr.IsInRoleAsync(usr, Role.Administrators),
-                IsOrganizer = await mgr.IsInRoleAsync(usr, Role.Organizers)
-            };
+            using (var uow = this.UnitOfWorkProvider.Create()) {
+                var mgr = this.AppUserManagerFactory();
+                var usr = await mgr.FindByIdAsync(userId.ToString());
+                return new UserDetailDTO {
+                    Id = usr.Id,
+                    Email = usr.Email,
+                    CompanyName = usr.CompanyName,
+                    FullName = usr.FullName,
+                    Enabled = usr.Enabled,
+                    IsAdministrator = await mgr.IsInRoleAsync(usr, Role.Administrators),
+                    IsOrganizer = await mgr.IsInRoleAsync(usr, Role.Organizers)
+                };
+            }
         }
 
         public async Task Save(UserDetailDTO item) {
-            var mgr = this.AppUserManagerFactory();
-            var usr = await mgr.FindByIdAsync(item.Id.ToString());
+            using (var uow = this.UnitOfWorkProvider.Create()) {
+                var mgr = this.AppUserManagerFactory();
+                var usr = await mgr.FindByIdAsync(item.Id.ToString());
 
-            // Enable or disable user
-            usr.Enabled = item.Enabled;
-            await mgr.UpdateAsync(usr);
+                // Enable or disable user
+                usr.Enabled = item.Enabled;
+                await mgr.UpdateAsync(usr);
 
-            // Update roles
-            await mgr.RemoveFromRolesAsync(usr, Role.AllRoles);
-            if (item.IsAdministrator) await mgr.AddToRoleAsync(usr, Role.Administrators);
-            if (item.IsOrganizer) await mgr.AddToRoleAsync(usr, Role.Organizers);
+                // Update roles
+                await mgr.RemoveFromRolesAsync(usr, Role.AllRoles);
+                if (item.IsAdministrator) await mgr.AddToRoleAsync(usr, Role.Administrators);
+                if (item.IsOrganizer) await mgr.AddToRoleAsync(usr, Role.Organizers);
+
+                await uow.CommitAsync();
+            }
         }
 
     }

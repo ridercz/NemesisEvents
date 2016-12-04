@@ -29,7 +29,9 @@ namespace Altairis.NemesisEvents.BL.Facades {
                 var usr = await mgr.FindByIdAsync(this.CurrentUser.Id.ToString());
                 Mapper.Map(item, usr);
                 await mgr.UpdateAsync(usr);
-            }        }
+                await uow.CommitAsync();
+            }
+        }
 
     }
 }
