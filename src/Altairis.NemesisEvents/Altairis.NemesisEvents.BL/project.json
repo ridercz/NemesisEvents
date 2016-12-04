@@ -1,25 +1,27 @@
 {
-  "version": "1.0.0-*",
-
   "dependencies": {
-    "NETStandard.Library": "1.6.1",
-    "Microsoft.EntityFrameworkCore": "1.1.0",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
-    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
     "Altairis.NemesisEvents.DAL": {
       "target": "project"
     },
-    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-06",
-    "Riganti.Utils.Infrastructure.Services": "2.0.0-alpha-06",
-    "Riganti.Utils.Infrastructure.DotVVM": "2.0.0-alpha-06",
-    "Riganti.Utils.Infrastructure.AutoMapper": "2.0.0-alpha-06",
     "AutoMapper": "5.2.0",
-    "DotVVM.Core": "1.1.0-alpha-r4"
+    "DotVVM.Core": "1.1.0-alpha-r4",
+    "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.1.0",
+    "Microsoft.EntityFrameworkCore": "1.1.0",
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.1.0",
+    "Microsoft.NETCore.App": {
+      "version": "1.1.0",
+      "type": "platform"
+    },
+    "NETStandard.Library": "1.6.1",
+    "Riganti.Utils.Infrastructure.AutoMapper": "2.0.0-alpha-06",
+    "Riganti.Utils.Infrastructure.DotVVM": "2.0.0-alpha-06",
+    "Riganti.Utils.Infrastructure.EntityFrameworkCore": "2.0.0-alpha-06",
+    "Riganti.Utils.Infrastructure.Services": "2.0.0-alpha-06"
   },
-
   "frameworks": {
     "netcoreapp1.0": {
       "imports": "dnxcore50"
     }
-  }
+  },
+  "version": "1.0.0-*"
 }
