@@ -137,21 +137,27 @@ UPDATE NemesisEvents.dbo.Attendees SET UserId = 2829 WHERE UserId = 3663
 UPDATE NemesisEvents.dbo.Attendees SET UserId = 253  WHERE UserId = 3149
 UPDATE NemesisEvents.dbo.Attendees SET UserId = 2825 WHERE UserId = 3604
 UPDATE NemesisEvents.dbo.Attendees SET UserId = 3523 WHERE UserId = 3526
-UPDATE NemesisEvents.dbo.Attendees SET UserId = 1458 WHERE UserId = 4065
-UPDATE NemesisEvents.dbo.Attendees SET UserId = 4286 WHERE UserId = 4659
-UPDATE NemesisEvents.dbo.Attendees SET UserId = 4477 WHERE UserId = 4408
+UPDATE NemesisEvents.dbo.Attendees SET UserId = 1458 WHERE UserId = 4066
+UPDATE NemesisEvents.dbo.Attendees SET UserId = 4287 WHERE UserId = 4660
+UPDATE NemesisEvents.dbo.Attendees SET UserId = 4409 WHERE UserId = 4478
 
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 83   WHERE UserId = 120
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 2829 WHERE UserId = 3663
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 253  WHERE UserId = 3149
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 2825 WHERE UserId = 3604
 UPDATE NemesisEvents.dbo.UserAreas SET UserId = 3523 WHERE UserId = 3526
-UPDATE NemesisEvents.dbo.UserAreas SET UserId = 1458 WHERE UserId = 4065
-UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4286 WHERE UserId = 4659
-UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4477 WHERE UserId = 4408
+UPDATE NemesisEvents.dbo.UserAreas SET UserId = 1458 WHERE UserId = 4066
+UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4287 WHERE UserId = 4660
+UPDATE NemesisEvents.dbo.UserAreas SET UserId = 4409 WHERE UserId = 4478
 
 PRINT 'Deleting duplicate users...'
-DELETE FROM NemesisEvents.dbo.AspNetUsers WHERE Id IN (120, 3663, 3149, 3604, 3526, 4065, 4659, 4408)
+DELETE FROM NemesisEvents.dbo.AspNetUsers WHERE Id IN (120, 3663, 3149, 3604, 3526, 4066, 4660, 4478)
+
+PRINT 'Finding duplicate users again...'
+SELECT U.Id, U.UserName, U.Email
+FROM NemesisEvents.dbo.AspNetUsers AS U
+WHERE Email IN (SELECT Email FROM NemesisEvents.dbo.AspNetUsers GROUP BY Email HAVING COUNT(*) > 1)
+ORDER BY U.Email, U.Id
 
 PRINT 'Changing user names to email addresses...'
 UPDATE NemesisEvents.dbo.AspNetUsers SET UserName = Email, NormalizedUserName = UPPER(Email)
