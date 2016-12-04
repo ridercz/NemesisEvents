@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Altairis.NemesisEvents.BL.Services.Web;
 using Autofac;
+using Autofac.Core;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
@@ -11,11 +12,10 @@ using Riganti.Utils.Infrastructure.Services;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper {
     public class WebInstaller {
-        public static void Install(ContainerBuilder builder)
-        {
+        public static void Install(ContainerBuilder builder) {
             builder.RegisterAssemblyTypes(typeof(WebInstaller).GetTypeInfo().Assembly)
                 .AssignableTo<DotvvmViewModelBase>()
-                .PropertiesAutowired()
+                .PropertiesAutowired(new DefaultPropertySelector(preserveSetValues: true))
                 .InstancePerDependency();
 
             builder.RegisterAssemblyTypes(typeof(WebInstaller).GetTypeInfo().Assembly)
