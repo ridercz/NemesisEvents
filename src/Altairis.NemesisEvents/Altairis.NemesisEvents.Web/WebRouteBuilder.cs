@@ -39,5 +39,16 @@ namespace Altairis.NemesisEvents.Web
             return new WebRoute(domain, configuration.RouteTable["ResetPassword"].BuildUrl(new {})
                 + "?email=" + WebUtility.UrlEncode(email) + "&token=" + WebUtility.UrlEncode(token));
         }
+
+        public WebRoute Register()
+        {
+            return new WebRoute(domain, configuration.RouteTable["Register"].BuildUrl(new { }));
+        }
+
+        public WebRoute VerifyEmail(string email, string token)
+        {
+            return new WebRoute(domain, configuration.RouteTable["VerifyEmail"].BuildUrl(new { })
+                + "?email=" + WebUtility.UrlEncode(email) + "&token=" + WebUtility.UrlEncode(token));
+        }
     }
 }

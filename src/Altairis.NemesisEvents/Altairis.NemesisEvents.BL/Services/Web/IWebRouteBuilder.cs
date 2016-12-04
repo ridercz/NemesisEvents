@@ -17,5 +17,9 @@ namespace Altairis.NemesisEvents.BL.Services.Web
 
         WebRoute ResetPassword(string email, string token);
 
+        WebRoute Register();
+
+        WebRoute VerifyEmail(string email, string token);
+
     }
 }

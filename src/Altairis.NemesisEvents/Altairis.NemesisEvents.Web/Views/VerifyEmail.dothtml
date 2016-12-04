@@ -1,0 +1,11 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.VerifyEmailViewModel, Altairis.NemesisEvents.Web
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <h2>Ověření e-mailové adresy</h2>
+
+    <cc:Alerts />
+
+</dot:Content>
+

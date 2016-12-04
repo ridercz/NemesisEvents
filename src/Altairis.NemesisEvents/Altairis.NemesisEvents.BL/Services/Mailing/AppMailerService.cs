@@ -24,5 +24,11 @@ namespace Altairis.NemesisEvents.BL.Services.Mailing
             var url = routeBuilder.ResetPassword(data.Email, token).AbsoluteUri;
             SendMail(data.Email, "Reset hesla", url);
         }
+
+        public void SendEmailAddressConfirmationEmail(RegisterDTO data, string token)
+        {
+            var url = routeBuilder.VerifyEmail(data.Email, token).AbsoluteUri;
+            SendMail(data.Email, "Ověření e-mailové adresy", url);
+        }
     }
 }

@@ -25,6 +25,9 @@
         <div class="text-center">
             <dot:RouteLink RouteName="ForgottenPassword" Text="Zapomenuté heslo" />
         </div>
+        <div class="text-center">
+            <dot:RouteLink RouteName="Register" Text="Registrace nového účtu" />
+        </div>
     </div>
 
     <div>

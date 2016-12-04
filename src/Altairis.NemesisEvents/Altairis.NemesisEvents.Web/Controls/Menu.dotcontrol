@@ -25,6 +25,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li Visible="{value: !IsLoggedIn}">
+                    <dot:RouteLink RouteName="Register" Text="Registrace" />
+                </li>
+                <li Visible="{value: !IsLoggedIn}">
                     <dot:RouteLink RouteName="Login" Text="Přihlásit se" />
                 </li>
                 <li class="dropdown" Visible="{value: IsLoggedIn}">
@@ -34,8 +37,11 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Můj profil</a></li>
                         <li><a href="#">Moje akce</a></li>
-                        <li role="separator" class="divider"></li>
                         <li><a href="#">Administrace</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li>
+                            <dot:LinkButton Text="Odhlásit se" Click="{command: Logout()}" Validation.Enabled="false" />
+                        </li>
                     </ul>
                 </li>
             </ul>
