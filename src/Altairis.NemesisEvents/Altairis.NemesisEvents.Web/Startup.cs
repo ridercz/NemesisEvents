@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Altairis.NemesisEvents.Web.Bootstrapper;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -10,16 +8,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using DotVVM.Framework.Hosting;
-using DotVVM.Framework.Configuration;
-using DotVVM.Framework.Security;
 using AutoMapper;
 using Altairis.NemesisEvents.BL.Mapping;
 using Altairis.NemesisEvents.BL.Services;
 using Altairis.NemesisEvents.DAL;
 using DotVVM.Framework.ViewModel.Serialization;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace Altairis.NemesisEvents.Web {
     public class Startup {
@@ -30,10 +24,13 @@ namespace Altairis.NemesisEvents.Web {
 
         public Startup(IHostingEnvironment env) {
             this.env = env;
-            // Load configuration from JSON file
+            // Load configuration
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(env.ContentRootPath);
-            builder.AddJsonFile("appconfig.json");
+            builder.AddJsonFile("appconfig.json");                                          // 1: General JSON file
+            builder.AddJsonFile($"appconfig.{env.EnvironmentName}.json", optional: true);   // 2: Environment specific JSON file
+            builder.AddUserSecrets();                                                       // 3: User secrets
+            builder.AddEnvironmentVariables();                                              // 4: Environment variables
             this.Configuration = builder.Build();
         }
 
