@@ -9,6 +9,7 @@ namespace Altairis.NemesisEvents.BL.DTO
         public string OldPassword { get; set; }
 
         [Required]
+        [MinLength(12)]
         public string NewPassword { get; set; }
 
         [Required]

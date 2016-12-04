@@ -14,6 +14,8 @@ namespace Altairis.NemesisEvents.BL.DTO
         public string Email { get; set; }
 
         [Required]
+        [MinLength(12)]
+        [Compare(nameof(PasswordConfirmation))]
         public string Password { get; set; }
 
         [Required]

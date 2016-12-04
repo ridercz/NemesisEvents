@@ -97,7 +97,7 @@ namespace Altairis.NemesisEvents.BL.Facades
                     var result = await manager.ResetPasswordAsync(user, token, data.Password);
                     if (!result.Succeeded)
                     {
-                        throw new UIException($"Změna hesla se nezdařila. Ujistěte se, že heslo má alespoň 8 znaků.");
+                        throw new UIException($"Změna hesla se nezdařila. Ujistěte se, že heslo má alespoň 12 znaků.");
                     }
 
                     await uow.CommitAsync();
@@ -127,7 +127,7 @@ namespace Altairis.NemesisEvents.BL.Facades
                         var createResult = await manager.CreateAsync(user, data.Password);
                         if (!createResult.Succeeded)
                         {
-                            throw new UIException($"Registrace se nezdařila. Ujistěte se, že heslo obsahuje alespoň 8 znaků.");
+                            throw new UIException($"Registrace se nezdařila. Ujistěte se, že heslo obsahuje alespoň 12 znaků.");
                         }
                     }
                     else if (!user.Enabled)
@@ -215,6 +215,24 @@ namespace Altairis.NemesisEvents.BL.Facades
                     user.UserName = newEmail;
                     user.NormalizedUserName = newEmail.ToUpper();
 
+                    await uow.CommitAsync();
+                }
+            }
+        }
+
+        public async Task ChangePassword(ChangePasswordDTO data)
+        {
+            using (var uow = UnitOfWorkProvider.Create())
+            {
+                using (var manager = AppUserManagerFactory())
+                {
+                    var user = await manager.FindByIdAsync(CurrentUser.Id.ToString());
+
+                    var result = await manager.ChangePasswordAsync(user, data.OldPassword, data.NewPassword);
+                    if (!result.Succeeded)
+                    {
+                        throw new UIException("Změna hesla se nezdařila.");
+                    }
                     await uow.CommitAsync();
                 }
             }

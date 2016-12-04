@@ -36,7 +36,10 @@ namespace Altairis.NemesisEvents.Web
             services.AddIdentity<User, Role>(options =>
             {
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredLength = 8;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 12;
                 options.User.RequireUniqueEmail = true;
             })
             .AddDefaultTokenProviders();
