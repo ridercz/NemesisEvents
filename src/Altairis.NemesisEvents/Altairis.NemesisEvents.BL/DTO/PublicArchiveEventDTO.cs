@@ -10,8 +10,6 @@ namespace Altairis.NemesisEvents.BL.DTO {
 
         public string Name { get; set; }
 
-        public string NameUrl => TextUtils.ToUrlName(Name);
-
         public DateTime DateBegin { get; set; }
 
         public DateTime DateEnd { get; set; }
