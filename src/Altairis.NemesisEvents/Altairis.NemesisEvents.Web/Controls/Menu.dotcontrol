@@ -1,6 +1,6 @@
 ﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.MasterPageViewModel, Altairis.NemesisEvents.Web
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default" RenderSettings.Mode="Server">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -9,7 +9,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">GeekCore</a>
+            <a class="navbar-brand" href="/">{{ value: Configuration.Value.ApplicationName }}</a>
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
