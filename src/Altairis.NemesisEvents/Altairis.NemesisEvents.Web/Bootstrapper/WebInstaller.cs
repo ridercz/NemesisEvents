@@ -5,6 +5,7 @@ using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using Riganti.Utils.Infrastructure.Core;
+using Riganti.Utils.Infrastructure.Services;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
@@ -25,7 +26,7 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
                 .SingleInstance();
 
             builder.RegisterType<CurrentUserProvider>()
-                .As<IUnitOfWorkProvider>()
+                .As<ICurrentUserProvider<int>>()
                 .SingleInstance();
         }
     }
