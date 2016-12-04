@@ -16,13 +16,13 @@ namespace Altairis.NemesisEvents.BL.DTO {
 
         public string VenueName { get; set; }
 
-        public string VenueDisplayName => string.Join(" - ", this.VenueCity, this.VenueName);
+        public string VenueDisplayName => this.VenueCity == null ? this.VenueName : string.Join(" - ", this.VenueCity, this.VenueName);
 
         public string OrganizerName { get; set; }
 
         public bool HasAdmissionFee { get; set; }
 
-        public IEnumerable<string> Tags { get; set;  }
+        public IEnumerable<string> Tags { get; set; }
 
         public string TagsDisplayText => string.Join(", ", this.Tags);
 
