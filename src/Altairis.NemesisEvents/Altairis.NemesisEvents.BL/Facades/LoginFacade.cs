@@ -145,8 +145,8 @@ namespace Altairis.NemesisEvents.BL.Facades
                     }
 
                     // send activation email
-                    var token = await manager.GenerateEmailConfirmationTokenAsync(user);
                     await uow.CommitAsync();
+                    var token = await manager.GenerateEmailConfirmationTokenAsync(user);
 
                     await MailerService.SendEmailAddressConfirmationEmailAsync(data, token);
                 }
@@ -205,7 +205,7 @@ namespace Altairis.NemesisEvents.BL.Facades
                 using (var manager = AppUserManagerFactory())
                 {
                     var user = await manager.FindByIdAsync(CurrentUser.Id.ToString());
-                   
+
                     var result = await manager.ChangeEmailAsync(user, newEmail, token);
                     if (!result.Succeeded)
                     {
