@@ -2,7 +2,15 @@
 @masterPage Views/Admin/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-
-
+    <h1>{{value: Title}}</h1>
+    <dot:GridView DataSource="{value: Items}">
+        <dot:GridViewTemplateColumn HeaderText="Název">
+            <dot:RouteLink RouteName="AdminEventsEdit" Param-EventId="{value: Id}" Text="{value: Name}" />
+        </dot:GridViewTemplateColumn>
+        <dot:GridViewTextColumn HeaderText="Datum" ValueBinding="{value: DateBegin}" FormatString="dd. MM. yyyy" />
+        <dot:GridViewTextColumn HeaderText="Lokace" ValueBinding="{value: VenueDisplayName}" />
+        <dot:GridViewTextColumn HeaderText="Vlastník" ValueBinding="{value: OwnerDisplayName}" />
+        <dot:GridViewTextColumn HeaderText="Reg." ValueBinding="{value: AttendeesCount}" />
+    </dot:GridView>
 </dot:Content>
 
