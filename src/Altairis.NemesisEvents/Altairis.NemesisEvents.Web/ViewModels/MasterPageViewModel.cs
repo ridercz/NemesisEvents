@@ -1,32 +1,34 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Altairis.NemesisEvents.BL;
 using Altairis.NemesisEvents.BL.Services;
 using Altairis.NemesisEvents.DAL;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using Riganti.Utils.Infrastructure.Core;
-using Altairis.NemesisEvents.BL;
 
 namespace Altairis.NemesisEvents.Web.ViewModels {
     public class MasterPageViewModel : DotvvmViewModelBase {
 
+        // Injected services
+
         [Bind(Direction.None)]
         public IOptions<AppConfiguration> Configuration { get; set; }
+
+        [Bind(Direction.None)]
+        public IHostingEnvironment Environment { get; set; }
+
+        // Page title and route
 
         public virtual string Title { get; set; }
 
         public string FormattedTitle => string.IsNullOrWhiteSpace(this.Title) ? this.Configuration.Value.PageTitleDefault : string.Format(this.Configuration.Value.PageTitleFormat, this.Title);
 
-        [Bind(Direction.ServerToClient)]
-        public string ErrorMessage { get; set; }
+        public string CurrentRoute => Context.Route.RouteName;
 
-        [Bind(Direction.ServerToClient)]
-        public string SuccessMessage { get; set; }
-
+        // User identity
         public bool IsLoggedIn => Context.HttpContext.User.Identity.IsAuthenticated;
 
         public string LoggedUserName => Context.HttpContext.User.Identity.Name;
@@ -35,12 +37,18 @@ namespace Altairis.NemesisEvents.Web.ViewModels {
 
         public bool IsAdministrator => Context.HttpContext.User.IsInRole(Role.Administrators);
 
-        public string CurrentRoute => Context.Route.RouteName;
-
         public async Task Logout() {
             await Context.GetAuthentication().SignOutAsync(AppUserManager.AuthenticationScheme);
             Context.RedirectToRoute("Default");
         }
+
+        // Error handling
+
+        [Bind(Direction.ServerToClient)]
+        public string ErrorMessage { get; set; }
+
+        [Bind(Direction.ServerToClient)]
+        public string SuccessMessage { get; set; }
 
         protected bool ExecuteSafe(Action action) {
             try {
@@ -55,7 +63,12 @@ namespace Altairis.NemesisEvents.Web.ViewModels {
                 return false;
             }
             catch (Exception ex) {
-                ErrorMessage = "Došlo k neznámé chybì.";
+                if (this.Environment.IsProduction()) {
+                    this.ErrorMessage = "Došlo k vnitøní chybì.";
+                }
+                else {
+                    this.ErrorMessage = ex.Message;
+                }
                 return false;
             }
         }
@@ -73,7 +86,12 @@ namespace Altairis.NemesisEvents.Web.ViewModels {
                 return false;
             }
             catch (Exception ex) {
-                ErrorMessage = "Došlo k neznámé chybì.";
+                if (this.Environment.IsProduction()) {
+                    this.ErrorMessage = "Došlo k vnitøní chybì.";
+                }
+                else {
+                    this.ErrorMessage = ex.Message;
+                }
                 return false;
             }
         }
