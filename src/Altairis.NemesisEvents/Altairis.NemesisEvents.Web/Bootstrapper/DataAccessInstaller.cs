@@ -19,6 +19,7 @@ using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.EntityFrameworkCore;
 using Riganti.Utils.Infrastructure.AutoMapper;
 using Riganti.Utils.Infrastructure.Services.Facades;
+using Altairis.NemesisEvents.BL;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
@@ -30,7 +31,7 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
 
             builder.Register(c =>
                 {
-                    var options = c.Resolve<IOptions<AppConfig>>().Value;
+                    var options = c.Resolve<IOptions<AppConfiguration>>().Value;
                     return new NemesisEventsContext(options.SqlConnectionString);
                 })
                 .As<DbContext>()

@@ -9,6 +9,7 @@ using DotVVM.Framework.ViewModel;
 using Microsoft.Extensions.Options;
 using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.Services;
+using Altairis.NemesisEvents.BL;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper {
     public class WebInstaller {
@@ -24,7 +25,7 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper {
 
             builder.Register(c =>
                 {
-                    var options = c.Resolve<IOptions<AppConfig>>().Value;
+                    var options = c.Resolve<IOptions<AppConfiguration>>().Value;
                     return new WebRouteBuilder(options.BaseUrl, c.Resolve<DotvvmConfiguration>());
                 })
                 .As<IWebRouteBuilder>()

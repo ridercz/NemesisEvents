@@ -32,6 +32,7 @@ namespace Altairis.NemesisEvents.BL.Mapping {
                 .ForMember(e => e.WatchedAreas, m => m.DropAndCreateCollection(uowProvider, x => x.WatchedAreaIds, x => new UserArea { AreaId = x }))
                 .ForMember(e => e.WatchedTags, m => m.DropAndCreateCollection(uowProvider, x => x.WatchedTagIds, x => new UserTag { TagId = x }));
 
+            cfg.CreateMap<User, UserBasicDTO>();
         }
     }
 }

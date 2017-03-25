@@ -9,12 +9,13 @@ using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
 using Microsoft.Extensions.Options;
 using Riganti.Utils.Infrastructure.Core;
+using Altairis.NemesisEvents.BL;
 
 namespace Altairis.NemesisEvents.Web.ViewModels {
     public class MasterPageViewModel : DotvvmViewModelBase {
 
         [Bind(Direction.None)]
-        public IOptions<AppConfig> Configuration { get; set; }
+        public IOptions<AppConfiguration> Configuration { get; set; }
 
         public virtual string Title { get; set; }
 

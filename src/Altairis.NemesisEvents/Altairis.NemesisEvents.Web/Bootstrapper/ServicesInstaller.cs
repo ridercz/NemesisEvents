@@ -12,6 +12,11 @@ using Microsoft.Extensions.Options;
 using Riganti.Utils.Infrastructure.Services.Amazon.SES;
 using Riganti.Utils.Infrastructure.Services.Facades;
 using Riganti.Utils.Infrastructure.Services.Mailing;
+using Altairis.NemesisEvents.BL;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
+using Riganti.Utils.Infrastructure.Services.Azure.Storage;
+using Riganti.Utils.Infrastructure.Services.Storage;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
@@ -30,17 +35,34 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
             
             builder.RegisterType<AppMailerService>()
                 .SingleInstance();
+
+            builder.Register(GetAzureStorageFolder)
+                .SingleInstance();
+
+            builder.Register(c => c.Resolve<IOptions<AppConfiguration>>().Value)
+                .SingleInstance();
+        }
+
+        private static IStorageFolder GetAzureStorageFolder(IComponentContext c)
+        {
+            var options = c.Resolve<IOptions<AppConfiguration>>().Value;
+
+            return AzureBlobStorageFolder.CreateContainerIfNotExists(
+                CloudStorageAccount.Parse(options.AttachmentsStorageConnectionString),
+                "attachments",
+                BlobContainerPublicAccessType.Container
+            );
         }
 
         private static IMailSender GetDevMailSender(IComponentContext c)
         {
-            var options = c.Resolve<IOptions<AppConfig>>().Value;
+            var options = c.Resolve<IOptions<AppConfiguration>>().Value;
             return new FileSystemMailSender(options.MailPickupDirectory);
         }
 
         private static IMailSender GetRealMailSender(IComponentContext c)
         {
-            var options = c.Resolve<IOptions<AppConfig>>().Value;
+            var options = c.Resolve<IOptions<AppConfiguration>>().Value;
             return new AmazonSESMailSender(options.AmazonAccessKeyId, options.AmazonSecretAccessKey);
         }
     }

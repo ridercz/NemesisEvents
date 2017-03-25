@@ -6,5 +6,7 @@
   "MailPickupDirectory": "C:\\InetPub\\MailRoot\\pickup",
   "PageTitleDefault": "Nemesis Events",
   "PageTitleFormat": "{0} | Nemesis Events",
-  "SqlConnectionString": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents"
+  "SqlConnectionString": "SERVER=.\\SqlExpress;TRUSTED_CONNECTION=yes;DATABASE=NemesisEvents",
+  "AttachmentsStoragePublicUrl": "https://geekcoredev.blob.core.windows.net/attachments/",
+  "AttachmentsStorageConnectionString": "DefaultEndpointsProtocol=https;AccountName=geekcoredev;AccountKey=jMMBjtskASdAaNtqsA6n5akv04szuf5hSs4qEbBzpvL6GKRD/myM5EOp4sza6HTG90/zDaHI6Rx9XBx6Ji5iOg==;EndpointSuffix=core.windows.net"
 }

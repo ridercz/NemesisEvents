@@ -15,6 +15,7 @@ using Altairis.NemesisEvents.BL.Services;
 using Altairis.NemesisEvents.DAL;
 using DotVVM.Framework.ViewModel.Serialization;
 using Microsoft.Extensions.Configuration;
+using Altairis.NemesisEvents.BL;
 
 namespace Altairis.NemesisEvents.Web {
     public class Startup {
@@ -41,7 +42,7 @@ namespace Altairis.NemesisEvents.Web {
             services.AddWebEncoders();
 
             services.AddOptions();
-            services.Configure<AppConfig>(this.Configuration);
+            services.Configure<AppConfiguration>(this.Configuration);
 
             services.AddDotVVM(options =>
             {

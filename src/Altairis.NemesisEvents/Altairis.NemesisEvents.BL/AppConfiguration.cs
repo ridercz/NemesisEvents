@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Altairis.NemesisEvents.Web {
-    public class AppConfig {
-
+namespace Altairis.NemesisEvents.BL
+{
+    public class AppConfiguration
+    {
         public string BaseUrl { get; set; }
 
         public string ApplicationName { get; set; }
@@ -21,5 +21,9 @@ namespace Altairis.NemesisEvents.Web {
         public string MailPickupDirectory { get; set; }
 
         public string SqlConnectionString { get; set; }
+
+        public string AttachmentsStoragePublicUrl { get; set; }
+
+        public string AttachmentsStorageConnectionString { get; set; }
     }
 }
