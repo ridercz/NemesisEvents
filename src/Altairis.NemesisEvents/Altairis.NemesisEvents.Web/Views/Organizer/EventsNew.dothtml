@@ -1,0 +1,8 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.Organizer.EventsNewViewModel, Altairis.NemesisEvents.Web
+@masterPage Views/Organizer/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+
+</dot:Content>
+

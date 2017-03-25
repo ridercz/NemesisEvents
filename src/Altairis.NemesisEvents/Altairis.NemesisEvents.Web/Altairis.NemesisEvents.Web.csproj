@@ -22,26 +22,42 @@
   <ItemGroup>
     <None Remove="dotvvm_serialized_config.json.tmp" />
     <None Remove="Views\Admin\Events.dothtml" />
+    <None Remove="Views\Admin\EventsEdit.dothtml" />
+    <None Remove="Views\Admin\EventsNew.dothtml" />
     <None Remove="Views\Admin\MasterPage.dotmaster" />
     <None Remove="Views\Admin\Tags.dothtml" />
+    <None Remove="Views\Admin\TagsEdit.dothtml" />
     <None Remove="Views\Admin\Users.dothtml" />
+    <None Remove="Views\Admin\UsersEdit.dothtml" />
     <None Remove="Views\Admin\Venues.dothtml" />
+    <None Remove="Views\Admin\VenuesEdit.dothtml" />
     <None Remove="Views\Layout.dotmaster" />
     <None Remove="Views\Organizer\Events.dothtml" />
+    <None Remove="Views\Organizer\EventsEdit.dothtml" />
+    <None Remove="Views\Organizer\EventsNew.dothtml" />
     <None Remove="Views\Organizer\MasterPage.dotmaster" />
     <None Remove="Views\Organizer\Venues.dothtml" />
+    <None Remove="Views\Organizer\VenuesEdit.dothtml" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="Views\Admin\Events.dothtml" />
+    <Content Include="Views\Admin\EventsEdit.dothtml" />
+    <Content Include="Views\Admin\EventsNew.dothtml" />
     <Content Include="Views\Admin\MasterPage.dotmaster" />
     <Content Include="Views\Admin\Tags.dothtml" />
+    <Content Include="Views\Admin\TagsEdit.dothtml" />
     <Content Include="Views\Admin\Users.dothtml" />
+    <Content Include="Views\Admin\UsersEdit.dothtml" />
     <Content Include="Views\Admin\Venues.dothtml" />
+    <Content Include="Views\Admin\VenuesEdit.dothtml" />
     <Content Include="Views\Layout.dotmaster" />
     <Content Include="Views\Organizer\Events.dothtml" />
+    <Content Include="Views\Organizer\EventsEdit.dothtml" />
+    <Content Include="Views\Organizer\EventsNew.dothtml" />
     <Content Include="Views\Organizer\MasterPage.dotmaster" />
     <Content Include="Views\Organizer\Venues.dothtml" />
+    <Content Include="Views\Organizer\VenuesEdit.dothtml" />
   </ItemGroup>
 
   <ItemGroup>

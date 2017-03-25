@@ -30,12 +30,20 @@ namespace Altairis.NemesisEvents.Web {
             config.RouteTable.Add("MyProfile", "my/profile", "Views/My/Profile.dothtml");
 
             config.RouteTable.Add("OrganizerEvents", "organizer/events", "Views/Organizer/Events.dothtml");
+            config.RouteTable.Add("OrganizerEventsNew", "organizer/events/new", "Views/Organizer/EventsNew.dothtml");
+            config.RouteTable.Add("OrganizerEventsEdit", "organizer/events/{id}", "Views/Organizer/EventsEdit.dothtml");
             config.RouteTable.Add("OrganizerVenues", "organizer/venues", "Views/Organizer/Venues.dothtml");
+            config.RouteTable.Add("OrganizerVenuesEdit", "organizer/venues/{id?}", "Views/Organizer/VenuesEdit.dothtml");
 
             config.RouteTable.Add("AdminEvents", "admin/events", "Views/Admin/Events.dothtml");
+            config.RouteTable.Add("AdminEventsNew", "admin/events/new", "Views/Admin/EventsNew.dothtml");
+            config.RouteTable.Add("AdminEventsEdit", "admin/events/{id}", "Views/Admin/EventsEdit.dothtml");
             config.RouteTable.Add("AdminUsers", "admin/users", "Views/Admin/Users.dothtml");
+            config.RouteTable.Add("AdminUsersEdit", "admin/users/{id?}", "Views/Admin/UsersEdit.dothtml");
             config.RouteTable.Add("AdminVenues", "admin/venues", "Views/Admin/Venues.dothtml");
+            config.RouteTable.Add("AdminVenuesEdit", "admin/venues/{id?}", "Views/Admin/VenuesEdit.dothtml");
             config.RouteTable.Add("AdminTags", "admin/tags", "Views/Admin/Tags.dothtml");
+            config.RouteTable.Add("AdminTagsEdit", "admin/tags/{id?}", "Views/Admin/TagsEdit.dothtml");
 
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));
