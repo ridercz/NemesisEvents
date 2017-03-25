@@ -12,5 +12,11 @@
         <dot:GridViewTextColumn HeaderText="Vlastník" ValueBinding="{value: OwnerDisplayName}" />
         <dot:GridViewTextColumn HeaderText="Reg." ValueBinding="{value: AttendeesCount}" />
     </dot:GridView>
+    <dot:DataPager DataSet="{value: Items}" class="pager">
+        <FirstPageTemplate><i class="glyphicon glyphicon-fast-backward"></i></FirstPageTemplate>
+        <PreviousPageTemplate><i class="glyphicon glyphicon-backward"></i></PreviousPageTemplate>
+        <NextPageTemplate><i class="glyphicon glyphicon-forward"></i></NextPageTemplate>
+        <LastPageTemplate><i class="glyphicon glyphicon-fast-forward"></i></LastPageTemplate>
+    </dot:DataPager>
 </dot:Content>
 
