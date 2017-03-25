@@ -24,7 +24,7 @@ namespace Altairis.NemesisEvents.BL.Facades {
             base.Save(detail);
         }
 
-        public override IEnumerable<EventDTO> GetList() {
+        public override IEnumerable<EventDTO> GetList(Action<IQuery<EventDTO>> queryConfiguration = null) {
             if (!this.CurrentUser.IsInRole(Role.Administrators)) throw new SecurityException("Only administrators can access events owned by other users.");
 
             return base.GetList();

@@ -22,9 +22,13 @@ namespace Altairis.NemesisEvents.Web.ViewModels
 
         public GridViewDataSet<PublicArchiveEventDTO> ArchiveEvents { get; set; } = new GridViewDataSet<PublicArchiveEventDTO>()
         {
-            PageSize = 40,
-            SortExpression = nameof(PublicArchiveEventDTO.DateBegin),
-            SortDescending = true
+            PagingOptions = {
+                PageSize = 40
+            },
+            SortingOptions = {
+                SortExpression = nameof(PublicArchiveEventDTO.DateBegin),
+                SortDescending = true
+            }
         };
 
 

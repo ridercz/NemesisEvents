@@ -42,7 +42,7 @@ namespace Altairis.NemesisEvents.Web {
         private void ConfigureResources(DotvvmConfiguration config, string applicationPath) {
             // register custom resources and adjust paths to the built-in resources
             config.Resources.Register("bootstrap", new ScriptResource() {
-                Url = "~/js/bootstrap.min.js",
+                Location = new UrlResourceLocation("~/js/bootstrap.min.js"),
                 Dependencies = new[] { "jquery" }
             });
         }

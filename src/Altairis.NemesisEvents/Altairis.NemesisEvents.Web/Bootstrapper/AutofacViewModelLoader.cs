@@ -15,13 +15,13 @@ namespace Altairis.NemesisEvents.Web.Bootstrapper
         private readonly IContainer container;
         private readonly IHttpContextAccessor httpContextAccessor;
 
-        public AutofacViewModelLoader(IServiceProvider serviceProvider, IContainer container) : base(serviceProvider)
+        public AutofacViewModelLoader(IServiceProvider serviceProvider, IContainer container)
         {
             this.container = container;
             httpContextAccessor = serviceProvider.GetService(typeof(IHttpContextAccessor)) as IHttpContextAccessor;
         }
 
-        protected override object CreateViewModelInstance(Type viewModelType)
+        protected override object CreateViewModelInstance(Type viewModelType, IDotvvmRequestContext context)
         {
             var scope = container.BeginLifetimeScope();
             httpContextAccessor.HttpContext.Items[typeof(AutofacViewModelLoader)] = scope;

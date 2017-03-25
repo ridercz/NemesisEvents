@@ -23,9 +23,10 @@ namespace Altairis.NemesisEvents.Web.ViewModels.My {
             this.eventsFacade = eventsFacade;
         }
 
-        public async override Task PreRender() {
+        public override Task PreRender() {
             this.UpcomingEvents = this.publicEventsFacade.ListUpcomingEvents(this.currentUser.Id);
             this.UpcomingOrganizedEvents = this.eventsFacade.ListEventsOrganizedBy();
+            return base.PreRender();
         }
 
 

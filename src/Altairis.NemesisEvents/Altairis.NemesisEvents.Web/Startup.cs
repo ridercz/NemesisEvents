@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using Altairis.NemesisEvents.Web.Bootstrapper;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
@@ -29,7 +30,7 @@ namespace Altairis.NemesisEvents.Web {
             builder.SetBasePath(env.ContentRootPath);
             builder.AddJsonFile("appconfig.json");                                          // 1: General JSON file
             builder.AddJsonFile($"appconfig.{env.EnvironmentName}.json", optional: true);   // 2: Environment specific JSON file
-            builder.AddUserSecrets();                                                       // 3: User secrets
+            builder.AddUserSecrets(typeof(Startup).GetTypeInfo().Assembly);                                                       // 3: User secrets
             builder.AddEnvironmentVariables();                                              // 4: Environment variables
             this.Configuration = builder.Build();
         }
@@ -42,8 +43,11 @@ namespace Altairis.NemesisEvents.Web {
             services.AddOptions();
             services.Configure<AppConfig>(this.Configuration);
 
-            services.AddDotVVM()
-                .ConfigureTempStorages("temp");
+            services.AddDotVVM(options =>
+            {
+                options.AddDefaultTempStorages("temp");
+            });
+                
             services.AddSingleton<IViewModelLoader>(p => new AutofacViewModelLoader(p, this.ApplicationContainer));
 
             services.AddIdentity<User, Role>(options => {

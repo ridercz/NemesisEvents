@@ -1,23 +1,22 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Altairis.NemesisEvents.Web", "Altairis.NemesisEvents.Web\Altairis.NemesisEvents.Web.xproj", "{25BADB1B-9CBE-46F0-97EF-2E3EFD8A6A51}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Altairis.NemesisEvents.DAL", "Altairis.NemesisEvents.DAL\Altairis.NemesisEvents.DAL.xproj", "{724F10A5-89F5-41D5-A989-624E107A9166}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Altairis.NemesisEvents.BL", "Altairis.NemesisEvents.BL\Altairis.NemesisEvents.BL.xproj", "{B3FA2EEF-E6E1-4AC0-B7FF-03E638AE1894}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc", "Misc", "{3903C91B-10CB-401C-897D-5FA8AFC58AFA}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\.gitattributes = ..\..\.gitattributes
 		..\..\.gitignore = ..\..\.gitignore
-		global.json = global.json
 		..\..\LICENSE = ..\..\LICENSE
 		..\..\misc\Migrate_GeekCore.sql = ..\..\misc\Migrate_GeekCore.sql
 		..\..\README.md = ..\..\README.md
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altairis.NemesisEvents.Web", "Altairis.NemesisEvents.Web\Altairis.NemesisEvents.Web.csproj", "{25BADB1B-9CBE-46F0-97EF-2E3EFD8A6A51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altairis.NemesisEvents.DAL", "Altairis.NemesisEvents.DAL\Altairis.NemesisEvents.DAL.csproj", "{724F10A5-89F5-41D5-A989-624E107A9166}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altairis.NemesisEvents.BL", "Altairis.NemesisEvents.BL\Altairis.NemesisEvents.BL.csproj", "{B3FA2EEF-E6E1-4AC0-B7FF-03E638AE1894}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

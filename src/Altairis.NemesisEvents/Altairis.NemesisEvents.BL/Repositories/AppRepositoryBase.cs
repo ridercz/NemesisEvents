@@ -13,7 +13,7 @@ namespace Altairis.NemesisEvents.BL.Repositories
 
         public new NemesisEventsContext Context => (NemesisEventsContext)base.Context;
 
-        public AppRepositoryBase(IUnitOfWorkProvider provider, IDateTimeNowProvider dateTimeNowProvider) : base(provider, dateTimeNowProvider)
+        public AppRepositoryBase(IUnitOfWorkProvider provider, IDateTimeProvider dateTimeNowProvider) : base(provider, dateTimeNowProvider)
         {
         }
     }
