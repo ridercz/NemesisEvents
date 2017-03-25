@@ -1,16 +1,16 @@
 ﻿@masterPage Views/MasterPage.dotmaster
 @viewModel Altairis.NemesisEvents.Web.ViewModels.DefaultViewModel, Altairis.NemesisEvents.Web
 <dot:Content ContentPlaceHolderID="MainContent" RenderSettings.Mode="Server">
-    
+
     <h2>Připravované akce</h2>
 
     <dot:Repeater DataSource="{value: UpcomingEvents}" class="row event-list">
         <div class="col-lg-6">
             <div class="event-box">
-                <h3><dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" Text="{value: Name}" /></h3>
+                <h3><dot:RouteLink RouteName="EventDetail" Param-EventId="{value: Id}"  Text="{value: Name}" /></h3>
 
                 <div class="pull-right event-buttons">
-                    <dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" class="btn btn-primary">
+                    <dot:RouteLink RouteName="EventDetail" Param-EventId="{value: Id}" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search"></span> Více informací
                     </dot:RouteLink>
                 </div>
@@ -38,10 +38,10 @@
     <dot:Repeater DataSource="{value: RecentEvents}" class="row event-list">
         <div class="col-lg-6">
             <div class="event-box">
-                <h3><dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" Text="{value: Name}" /></h3>
+                <h3><dot:RouteLink RouteName="EventDetail" Param-EventId="{value: Id}" Text="{value: Name}" /></h3>
 
                 <div class="pull-right event-buttons">
-                    <dot:RouteLink RouteName="EventDetail" Param-Id="{value: Id}" class="btn btn-primary">
+                    <dot:RouteLink RouteName="EventDetail" Param-EventId="{value: Id}" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search"></span> Více informací
                     </dot:RouteLink>
                 </div>
