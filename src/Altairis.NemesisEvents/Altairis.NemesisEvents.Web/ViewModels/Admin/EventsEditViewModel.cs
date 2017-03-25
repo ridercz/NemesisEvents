@@ -10,56 +10,56 @@ using DotVVM.Framework.Controls;
 using DotVVM.Framework.Storage;
 using DotVVM.Framework.ViewModel;
 
-namespace Altairis.NemesisEvents.Web.ViewModels.Admin
-{
-	public class EventsEditViewModel : EditViewModelBase<EventsFacade, EventDetailDTO, int>
-	{
-	    private readonly BaseListsFacade baseListsFacade;
-	    private readonly IUploadedFileStorage storage;
-	    protected override int ItemId => Convert.ToInt32(Context.Parameters["EventId"]);
-	    protected override string ContinuePageRouteName => "AdminEvents";
-	    protected override string GetPageTitle() => $"Editace akce {this.Item.Name}";
+namespace Altairis.NemesisEvents.Web.ViewModels.Admin {
+    public class EventsEditViewModel : EditViewModelBase<EventsFacade, EventDetailDTO, int> {
 
+        // Injected services
 
-	    public EventsEditViewModel(BaseListsFacade baseListsFacade, IUploadedFileStorage storage)
-	    {
-	        this.baseListsFacade = baseListsFacade;
-	        this.storage = storage;
-	    }
+        [Bind(Direction.None)]
+        public BaseListsFacade BaseListsFacade { get; set; }
 
+        [Bind(Direction.None)]
+        public IUploadedFileStorage Storage { get; set; }
 
-        [Bind(Direction.ServerToClientFirstRequest)]
-	    public List<UserBasicDTO> Users => baseListsFacade.GetOrganizerOrAdminUsers();
+        // Page infrastructire
 
-        [Bind(Direction.ServerToClientFirstRequest)]
-        public List<VenueBasicDTO> Venues => baseListsFacade.GetVenues();
+        protected override int ItemId => Convert.ToInt32(Context.Parameters["EventId"]);
+
+        protected override string ContinuePageRouteName => "AdminEvents";
+
+        protected override string GetPageTitle() => $"Editace akce {this.Item.Name}";
+
+        // Binding properties
 
         [Bind(Direction.ServerToClientFirstRequest)]
-        public List<TagDTO> Tags => baseListsFacade.GetTags();
+        public List<UserBasicDTO> Users => this.BaseListsFacade.GetOrganizerOrAdminUsers();
 
         [Bind(Direction.ServerToClientFirstRequest)]
-        public List<AttachmentTypeDTO> AttachmentTypes => baseListsFacade.GetAttachmentTypes();
+        public List<VenueBasicDTO> Venues => this.BaseListsFacade.GetVenues();
 
+        [Bind(Direction.ServerToClientFirstRequest)]
+        public List<TagDTO> Tags => this.BaseListsFacade.GetTags();
 
-	    public UploadedFilesCollection AttachmentUploads { get; set; } = new UploadedFilesCollection();
+        [Bind(Direction.ServerToClientFirstRequest)]
+        public List<AttachmentTypeDTO> AttachmentTypes => BaseListsFacade.GetAttachmentTypes();
 
-	    public async Task UploadAttachments()
-	    {
-	        foreach (var file in AttachmentUploads.Files)
-	        {
-	            using (var stream = storage.GetFile(file.FileId))
-	            {
-	                var attachment = await Facade.UploadAttachmentAsync(ItemId, file.FileName, stream);
+        // Attachment upload
+
+        public UploadedFilesCollection AttachmentUploads { get; set; } = new UploadedFilesCollection();
+
+        public async Task UploadAttachments() {
+            foreach (var file in AttachmentUploads.Files) {
+                using (var stream = Storage.GetFile(file.FileId)) {
+                    var attachment = await Facade.UploadAttachmentAsync(ItemId, file.FileName, stream);
                     Item.Attachments.Add(attachment);
-	            }
-	        }
-	        AttachmentUploads.Clear();
-	    }
+                }
+            }
+            AttachmentUploads.Clear();
+        }
 
-	    public void RemoveAttachment(AttachmentDTO attachment)
-	    {
-	        Item.Attachments.Remove(attachment);
-	    }
+        public void RemoveAttachment(AttachmentDTO attachment) {
+            Item.Attachments.Remove(attachment);
+        }
     }
 }
 
