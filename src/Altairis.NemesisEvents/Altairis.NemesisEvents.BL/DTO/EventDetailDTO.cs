@@ -50,9 +50,9 @@ namespace Altairis.NemesisEvents.BL.DTO {
         [Required]
         public int OwnerId { get; set; }
 
-        public IList<int> TagIds { get; } = new List<int>();
+        public IList<int> TagIds { get; set; } = new List<int>();
 
-        public IList<AttachmentDTO> Attachments { get; } = new List<AttachmentDTO>();
+        public IList<AttachmentDTO> Attachments { get; set; } = new List<AttachmentDTO>();
 
     }
 

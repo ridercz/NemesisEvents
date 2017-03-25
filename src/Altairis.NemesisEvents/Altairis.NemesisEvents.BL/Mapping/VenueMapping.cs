@@ -11,6 +11,8 @@ namespace Altairis.NemesisEvents.BL.Mapping {
         public void Map(IMapperConfigurationExpression cfg) {
             cfg.CreateMap<Venue, VenueDTO>()
                 .ForMember(e => e.HasGpsCoordinates, m => m.MapFrom(x => x.Latitude.HasValue && x.Longitude.HasValue));
+
+            cfg.CreateMap<Venue, VenueBasicDTO>();
         }
     }
 }

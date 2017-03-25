@@ -3,6 +3,145 @@
 
 <dot:Content ContentPlaceHolderID="MainContent">
 
+    <h1>{{value: Title}}</h1>
 
+    <form class="form" DataContext="{value: Item}">
+
+        <div class="form-group">
+            <label>Název akce</label>
+            <div>
+                <dot:TextBox Text="{value: Name}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Datum začátku akce</label>
+                <div>
+                    <dot:TextBox Text="{value: DateBegin}" class="form-control"
+                                 ValueType="DateTime" FormatString="d.M.yyyy H:mm"/>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label>Datum konce akce</label>
+                <div>
+                    <dot:TextBox Text="{value: DateEnd}" class="form-control" 
+                                 ValueType="DateTime" FormatString="d.M.yyyy H:mm"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Místo konání</label>
+            <div>
+                <dot:ComboBox DataSource="{value: _parent.Venues}" 
+                              DisplayMember="DisplayName"
+                              ValueMember="Id"
+                              SelectedValue="{value: VenueId}"
+                              class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Vlastník akce</label>
+            <div>
+                <dot:ComboBox DataSource="{value: _parent.Users}"
+                              DisplayMember="FullName"
+                              ValueMember="Id"
+                              SelectedValue="{value: OwnerId}"
+                              class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>URL webových stránek akce</label>
+            <div>
+                <dot:TextBox Text="{value: InfoUrl}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <dot:CheckBox Checked="{value: UseRegistration}" 
+                              Text="Použít místní registrační systém" />
+            </div>
+        </div>
+
+        <div class="form-group" Visible="{value: UseRegistration}">
+            <div>
+                <dot:CheckBox Checked="{value: AllowRegistration}"
+                              Text="Povolit registraci nových uživatelů" />
+            </div>
+        </div>
+
+        <div class="form-group" Visible="{value: !UseRegistration}">
+            <label>URL registračního formuláře</label>
+            <div>
+                <dot:TextBox Text="{value: RegistrationUrl}" class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Vstupné</label>
+            <div>
+                <dot:TextBox Text="{value: AdmissionFee}" class="form-control" style="width: 100px" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Tagy</label>
+            <dot:Repeater DataSource="{value: _parent.Tags}">
+                <dot:CheckBox Text="{value: Name}" 
+                              CheckedValue="{value: Id}"
+                              CheckedItems="{value: _parent.TagIds}" />
+            </dot:Repeater>
+        </div>
+
+        <div class="form-group">
+            <label>Popis akce</label>
+            <div>
+                <dot:TextBox Text="{value: Description}"
+                             Type="MultiLine" style="height: 500px"
+                             class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>URL videozáznamu</label>
+            <div>
+                <dot:TextBox Text="{value: VideoUrl}" class="form-control" />
+            </div>
+        </div>
+
+    </form>
+
+    <dot:GridView DataSource="{value: Item.Attachments}">
+        <dot:GridViewTemplateColumn HeaderText="Název">
+            <dot:TextBox Text="{value: Name}" class="form-control" />
+        </dot:GridViewTemplateColumn>
+        <dot:GridViewTemplateColumn HeaderText="Typ přílohy">
+            <dot:ComboBox DataSource="{value: _parent.AttachmentTypes}"
+                          DisplayMember="Name" ValueMember="Id"
+                          SelectedValue="{value: Type}"
+                          class="form-control" />
+        </dot:GridViewTemplateColumn>
+        <dot:GridViewTemplateColumn HeaderText="Soubor">
+            <a href="{value: StorageUrl}">stáhnout</a>
+        </dot:GridViewTemplateColumn>
+        <dot:GridViewTemplateColumn>
+            <dot:LinkButton Click="{command: _parent.RemoveAttachment(_this)}" 
+                            Validation.Enabled="false">
+                <i class="glyphicon glyphicon-remove"></i> 
+            </dot:LinkButton>
+        </dot:GridViewTemplateColumn>
+    </dot:GridView>
+
+    <dot:FileUpload UploadedFiles="{value: AttachmentUploads}" 
+                    UploadCompleted="{command: UploadAttachments()}" />
+
+
+    <p>
+        <dot:Button Text="Uložit" Click="{command: Submit()}" IsSubmitButton />
+    </p>
 </dot:Content>
 

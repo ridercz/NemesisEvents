@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Altairis.NemesisEvents.BL;
 using Altairis.NemesisEvents.BL.Services;
 using Altairis.NemesisEvents.DAL;
 using DotVVM.Framework.Hosting;
 using DotVVM.Framework.ViewModel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Options;
 using Riganti.Utils.Infrastructure.Core;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Altairis.NemesisEvents.Web.ViewModels {
     public class MasterPageViewModel : DotvvmViewModelBase {
@@ -17,7 +15,7 @@ namespace Altairis.NemesisEvents.Web.ViewModels {
         // Injected services
 
         [Bind(Direction.None)]
-        public IOptions<AppConfig> Configuration { get; set; }
+        public IOptions<AppConfiguration> Configuration { get; set; }
 
         [Bind(Direction.None)]
         public IHostingEnvironment Environment { get; set; }
