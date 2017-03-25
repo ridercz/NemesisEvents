@@ -8,10 +8,13 @@ using AutoMapper;
 
 namespace Altairis.NemesisEvents.BL.Mapping
 {
-    public class AttachmentMapping : IMapping {
-        public void Map(IMapperConfigurationExpression cfg) {
+    public class AttachmentMapping : IMapping
+    {
+        public void Map(IMapperConfigurationExpression cfg)
+        {
             cfg.CreateMap<Attachment, AttachmentDTO>();
-            cfg.CreateMap<AttachmentDTO, Attachment>();
+            cfg.CreateMap<AttachmentDTO, Attachment>()
+                .ForMember(a => a.Event, m => m.Ignore());
         }
     }
 }

@@ -101,6 +101,7 @@ namespace Altairis.NemesisEvents.Web {
                     mapping.Map(cfg);
                 }
             });
+            Mapper.AssertConfigurationIsValid();
         }
     }
 }
