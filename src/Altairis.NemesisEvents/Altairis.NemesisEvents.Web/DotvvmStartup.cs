@@ -29,6 +29,14 @@ namespace Altairis.NemesisEvents.Web {
             config.RouteTable.Add("MyDefault", "my", "Views/My/Default.dothtml");
             config.RouteTable.Add("MyProfile", "my/profile", "Views/My/Profile.dothtml");
 
+            config.RouteTable.Add("OrganizerEvents", "organizer/events", "Views/Organizer/Events.dothtml");
+            config.RouteTable.Add("OrganizerVenues", "organizer/venues", "Views/Organizer/Venues.dothtml");
+
+            config.RouteTable.Add("AdminEvents", "admin/events", "Views/Admin/Events.dothtml");
+            config.RouteTable.Add("AdminUsers", "admin/users", "Views/Admin/Users.dothtml");
+            config.RouteTable.Add("AdminVenues", "admin/venues", "Views/Admin/Venues.dothtml");
+            config.RouteTable.Add("AdminTags", "admin/tags", "Views/Admin/Tags.dothtml");
+
             // Uncomment the following line to auto-register all dothtml files in the Views folder
             // config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));
         }
@@ -36,6 +44,8 @@ namespace Altairis.NemesisEvents.Web {
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath) {
             // register code-only controls and markup controls
             config.Markup.AddMarkupControl("cc", "Menu", "Controls/Menu.dotcontrol");
+            config.Markup.AddMarkupControl("cc", "OrganizerMenu", "Controls/OrganizerMenu.dotcontrol");
+            config.Markup.AddMarkupControl("cc", "AdminMenu", "Controls/AdminMenu.dotcontrol");
             config.Markup.AddMarkupControl("cc", "Alerts", "Controls/Alerts.dotcontrol");
         }
 

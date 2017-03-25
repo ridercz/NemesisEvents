@@ -1,13 +1,12 @@
-﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.MasterPageViewModel, Altairis.NemesisEvents.Web
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.Organizer.MasterPageViewModel, Altairis.NemesisEvents.Web
 @masterPage Views/Layout.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
 
-    <cc:Menu />
+    <cc:OrganizerMenu />
 
     <dot:ContentPlaceHolder ID="MainContent">
     </dot:ContentPlaceHolder>
 
 </dot:Content>
-
 

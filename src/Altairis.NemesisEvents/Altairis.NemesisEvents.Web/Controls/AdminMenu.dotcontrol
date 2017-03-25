@@ -13,32 +13,24 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class-active="{value: CurrentRoute == 'Default'}">
-                    <dot:RouteLink RouteName="Default" Text="Nadcházející akce" />
+                <li class-active="{value: CurrentRoute == 'AdminEvents'}">
+                    <dot:RouteLink RouteName="AdminEvents" Text="Akce" />
                 </li>
-                <li class-active="{value: CurrentRoute == 'Archive'}">
-                    <dot:RouteLink RouteName="Archive" Text="Archiv" />
+                <li class-active="{value: CurrentRoute == 'AdminUsers'}">
+                    <dot:RouteLink RouteName="AdminUsers" Text="Uživatelé" />
                 </li>
-                <li>
-                    <a href="#">O projektu</a>
+                <li class-active="{value: CurrentRoute == 'AdminVenues'}">
+                    <dot:RouteLink RouteName="AdminVenues" Text="Lokace" />
+                </li>
+                <li class-active="{value: CurrentRoute == 'AdminTags'}">
+                    <dot:RouteLink RouteName="AdminTags" Text="Tagy" />
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li Visible="{value: !IsLoggedIn}">
-                    <dot:RouteLink RouteName="Register" Text="Registrace" />
+                <li>
+                    <dot:RouteLink RouteName="Default" Text="Zpět na úvod" />
                 </li>
-                <li Visible="{value: !IsLoggedIn}">
-                    <dot:RouteLink RouteName="Login" Text="Přihlásit se" />
-                </li>
-
-                <li Visible="{value: IsOrganizer}">
-                    <dot:RouteLink RouteName="OrganizerEvents" Text="Sekce pro organizátory" />
-                </li>
-                <li Visible="{value: IsAdministrator}">
-                    <dot:RouteLink RouteName="AdminEvents" Text="Administrace" />
-                </li>
-
-                <li class="dropdown" Visible="{value: IsLoggedIn}">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         {{value: LoggedUserName}} <span class="caret"></span>
                     </a>

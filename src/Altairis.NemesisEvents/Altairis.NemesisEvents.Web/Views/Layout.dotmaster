@@ -1,0 +1,20 @@
+﻿@viewModel Altairis.NemesisEvents.Web.ViewModels.MasterPageViewModel, Altairis.NemesisEvents.Web
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>{{value: FormattedTitle}}</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/site.min.css" rel="stylesheet" />
+</head>
+<body Validator.InvalidCssClass="has-error" Validator.SetToolTipText="true">
+    <div class="container">
+
+        <dot:ContentPlaceHolder ID="MainContent"/>
+
+    </div>
+
+    <dot:RequiredResource Name="bootstrap" />
+</body>
+</html>
+

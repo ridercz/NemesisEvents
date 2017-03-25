@@ -20,6 +20,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="dotvvm_serialized_config.json.tmp" />
+    <None Remove="Views\Admin\Events.dothtml" />
+    <None Remove="Views\Admin\MasterPage.dotmaster" />
+    <None Remove="Views\Admin\Tags.dothtml" />
+    <None Remove="Views\Admin\Users.dothtml" />
+    <None Remove="Views\Admin\Venues.dothtml" />
+    <None Remove="Views\Layout.dotmaster" />
+    <None Remove="Views\Organizer\Events.dothtml" />
+    <None Remove="Views\Organizer\MasterPage.dotmaster" />
+    <None Remove="Views\Organizer\Venues.dothtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\Admin\Events.dothtml" />
+    <Content Include="Views\Admin\MasterPage.dotmaster" />
+    <Content Include="Views\Admin\Tags.dothtml" />
+    <Content Include="Views\Admin\Users.dothtml" />
+    <Content Include="Views\Admin\Venues.dothtml" />
+    <Content Include="Views\Layout.dotmaster" />
+    <Content Include="Views\Organizer\Events.dothtml" />
+    <Content Include="Views\Organizer\MasterPage.dotmaster" />
+    <Content Include="Views\Organizer\Venues.dothtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="wwwroot\**\*">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </None>
