@@ -1,18 +1,18 @@
 using System.Reflection;
 using Altairis.NemesisEvents.BL.Mapping;
 using Autofac;
-using AutoMapper;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
-    public class AutoMapperInstaller
+    public class AutoMapperModule : Autofac.Module
     {
-        public static void Install(ContainerBuilder builder)
+        protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(typeof(IMapping).GetTypeInfo().Assembly)
                 .AssignableTo<IMapping>()
                 .As<IMapping>()
                 .SingleInstance();
         }
+        
     }
 }

@@ -11,15 +11,18 @@ using Riganti.Utils.Infrastructure.Core;
 using Riganti.Utils.Infrastructure.Services;
 using Altairis.NemesisEvents.BL;
 
-namespace Altairis.NemesisEvents.Web.Bootstrapper {
-    public class WebInstaller {
-        public static void Install(ContainerBuilder builder) {
-            builder.RegisterAssemblyTypes(typeof(WebInstaller).GetTypeInfo().Assembly)
+namespace Altairis.NemesisEvents.Web.Bootstrapper
+{
+    public class WebModule: Autofac.Module
+    {
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterAssemblyTypes(typeof(WebModule).GetTypeInfo().Assembly)
                 .AssignableTo<DotvvmViewModelBase>()
                 .PropertiesAutowired(new DefaultPropertySelector(preserveSetValues: true))
                 .InstancePerDependency();
 
-            builder.RegisterAssemblyTypes(typeof(WebInstaller).GetTypeInfo().Assembly)
+            builder.RegisterAssemblyTypes(typeof(WebModule).GetTypeInfo().Assembly)
                 .AssignableTo<IDotvvmPresenter>()
                 .InstancePerDependency();
 

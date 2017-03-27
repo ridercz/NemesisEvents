@@ -23,9 +23,9 @@ using Altairis.NemesisEvents.BL;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
-    public class DataAccessInstaller
+    public class DataAccessModule: Autofac.Module
     {
-        public static void Install(ContainerBuilder builder)
+        protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>();
 

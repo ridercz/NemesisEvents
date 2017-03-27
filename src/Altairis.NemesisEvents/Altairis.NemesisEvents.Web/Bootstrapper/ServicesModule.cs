@@ -20,16 +20,17 @@ using Riganti.Utils.Infrastructure.Services.Storage;
 
 namespace Altairis.NemesisEvents.Web.Bootstrapper
 {
-    public class ServicesInstaller
+    public class ServicesModule : Autofac.Module
     {
-        public static void Install(ContainerBuilder builder, IHostingEnvironment env)
+        
+        protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(typeof(AppFacadeBase).GetTypeInfo().Assembly)
                 .AssignableTo<FacadeBase>()
                 .PropertiesAutowired()
                 .InstancePerDependency();
 
-            builder.Register(c => env.IsDevelopment() ? GetDevMailSender(c) : GetRealMailSender(c))
+            builder.Register(c => c.Resolve<IHostingEnvironment>().IsDevelopment() ? GetDevMailSender(c) : GetRealMailSender(c))
                 .As<IMailSender>()
                 .SingleInstance();
             
