@@ -16,6 +16,8 @@ using Altairis.NemesisEvents.DAL;
 using DotVVM.Framework.ViewModel.Serialization;
 using Microsoft.Extensions.Configuration;
 using Altairis.NemesisEvents.BL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace Altairis.NemesisEvents.Web
 {
@@ -75,8 +77,17 @@ namespace Altairis.NemesisEvents.Web
             return new AutofacServiceProvider(ApplicationContainer);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IApplicationLifetime appLifetime)
+        {
+            ConfigureRequestPipeline(app, env);
+            ConfigureDatabase();
+            ConfigureProviders(appLifetime);
+        }
+
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        private static void ConfigureRequestPipeline(IApplicationBuilder app, IHostingEnvironment env)
         {
             // cookie authentication
             app.UseCookieAuthentication(new CookieAuthenticationOptions()
@@ -96,7 +107,10 @@ namespace Altairis.NemesisEvents.Web
             {
                 FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(env.WebRootPath)
             });
+        }
 
+        private void ConfigureProviders(IApplicationLifetime appLifetime)
+        {
             // dispose container
             appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
 
@@ -109,6 +123,12 @@ namespace Altairis.NemesisEvents.Web
                 }
             });
             Mapper.AssertConfigurationIsValid();
+        }
+
+        private void ConfigureDatabase()
+        {
+            //migrate database to latest version
+            ApplicationContainer.Resolve<DbContext>().Database.Migrate();
         }
     }
 }
