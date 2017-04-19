@@ -73,29 +73,29 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.0.0" />
-    <PackageReference Include="DotVVM" Version="1.1.0" />
-    <PackageReference Include="DotVVM.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="DotVVM" Version="1.1.0.2-test" />
+    <PackageReference Include="DotVVM.AspNetCore" Version="1.1.0.2-test" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="1.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="1.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="1.1.1" />
-    <PackageReference Include="Riganti.Utils.Infrastructure.AspNetCore" Version="2.0.0-alpha-17" />
-    <PackageReference Include="Riganti.Utils.Infrastructure.AutoMapper" Version="2.0.0-alpha-17" />
-    <PackageReference Include="Riganti.Utils.Infrastructure.DotVVM" Version="2.0.0-alpha-17" />
-    <PackageReference Include="Riganti.Utils.Infrastructure.EntityFrameworkCore" Version="2.0.0-alpha-17" />
-    <PackageReference Include="Riganti.Utils.Infrastructure.Services" Version="2.0.0-alpha-17" />
-    <PackageReference Include="Riganti.Utils.Infrastructure.Services.Amazon.SES" Version="2.0.0-alpha-17" />
-    <PackageReference Include="Riganti.Utils.Infrastructure.Services.Azure" Version="2.0.0-alpha-17" />
+    <PackageReference Include="Riganti.Utils.Infrastructure.AspNetCore" Version="2.0.0-alpha-19" />
+    <PackageReference Include="Riganti.Utils.Infrastructure.AutoMapper" Version="2.0.0-alpha-19" />
+    <PackageReference Include="Riganti.Utils.Infrastructure.DotVVM" Version="2.0.0-alpha-19" />
+    <PackageReference Include="Riganti.Utils.Infrastructure.EntityFrameworkCore" Version="2.0.0-alpha-19" />
+    <PackageReference Include="Riganti.Utils.Infrastructure.Services" Version="2.0.0-alpha-19" />
+    <PackageReference Include="Riganti.Utils.Infrastructure.Services.Amazon.SES" Version="2.0.0-alpha-19" />
+    <PackageReference Include="Riganti.Utils.Infrastructure.Services.Azure" Version="2.0.0-alpha-19" />
   </ItemGroup>
 
   <ItemGroup>
