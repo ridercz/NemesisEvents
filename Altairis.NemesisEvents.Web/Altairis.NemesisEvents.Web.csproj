@@ -73,8 +73,8 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.0.0" />
-    <PackageReference Include="DotVVM" Version="1.1.0.10" />
-    <PackageReference Include="DotVVM.AspNetCore" Version="1.1.0.10" />
+    <PackageReference Include="DotVVM" Version="1.1.1" />
+    <PackageReference Include="DotVVM.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.1" />
